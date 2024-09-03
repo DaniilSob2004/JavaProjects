@@ -10,7 +10,7 @@ public class Input {
         System.out.print(text);
         do {
             while (!scanner.hasNextInt()) {
-                System.out.println("Ошибка: введите целое число.");
+                System.out.println(errText);
                 scanner.next();
             }
             number = scanner.nextInt();

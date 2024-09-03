@@ -209,7 +209,7 @@ public class StreetMenu {
         // show
         List<IBuilding> nearbyShops = street.findShopsNearby(numAddressStr, range, typeShop);
         if (nearbyShops.isEmpty()) {
-            System.out.println("No shops found!");
+            System.out.println("No shops found around residential house!");
         }
         else {
             System.out.println("Shops around residential house:");
