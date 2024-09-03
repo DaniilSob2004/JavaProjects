@@ -1,3 +1,13 @@
+HW 8:
+![Street drawio](https://github.com/user-attachments/assets/73c76460-d961-4993-897c-06c044eb35e5)
+![DZ](https://github.com/user-attachments/assets/f5c23b81-08c7-4e6a-aeff-98d4b536c6e0)
+![DZ2](https://github.com/user-attachments/assets/1c424831-4d4d-433d-988d-7c1768721026)
+![DZ3](https://github.com/user-attachments/assets/9e4d892d-f5ab-4c56-a274-c8785d040fed)
+![DZ4](https://github.com/user-attachments/assets/f82655b7-6430-4101-bd6a-e62f77b80116)
+![DZ5](https://github.com/user-attachments/assets/0a0361a2-c6f3-4def-8a9c-78e18d36cc85)
+
+////////////////////////////////////////////////
+
 HW 3:
 ![LibraryCatalog drawio](https://github.com/user-attachments/assets/19159154-a1a6-4377-838f-dd621ae89bc1)
 
