@@ -1,6 +1,6 @@
 HW9:
-![DZ1](https://github.com/user-attachments/assets/94787795-1a87-4dfa-9f2d-3dd461e59c01)
-![DZ2](https://github.com/user-attachments/assets/134eccb6-1be2-4534-90d2-a7e61e5327d5)
+  - ![DZ1](https://github.com/user-attachments/assets/94787795-1a87-4dfa-9f2d-3dd461e59c01)
+  - ![DZ2](https://github.com/user-attachments/assets/134eccb6-1be2-4534-90d2-a7e61e5327d5)
 
 ////////////////////////////////////////////////
 
