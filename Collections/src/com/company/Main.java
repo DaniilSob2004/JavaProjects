@@ -14,12 +14,12 @@ public class Main {
         // ---------------- List ----------------
         System.out.println("-".repeat(30));
 
-        ArrayList<String> list1 = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
         String[] arrStr = { "Daniil", "Ksenia", "Vishnu" };
         Collections.addAll(list1, arrStr);
         System.out.println("list1: " + list1);
 
-        ArrayList<String> list2 = new ArrayList<>(list1);
+        List<String> list2 = new ArrayList<>(list1);
         System.out.println("list2: " + list2);
 
         List<String> list3 = Arrays.asList("Apple", "Banana", "Cherry");
@@ -47,14 +47,14 @@ public class Main {
         // ---------------- Set ----------------
         System.out.println("-".repeat(30));
 
-        HashSet<String> set1 = new HashSet<>();
+        Set<String> set1 = new HashSet<>();
         set1.add("Dan");
         set1.add("Sob");
         set1.addAll(list1);
         set1.addAll(list2);
         System.out.println("set1: " + set1);
 
-        LinkedHashSet<String> set2 = new LinkedHashSet<>();
+        Set<String> set2 = new LinkedHashSet<>();
         set2.addAll(list2);
         set2.addAll(list3);
         System.out.println("set2: " + set2);
@@ -63,7 +63,7 @@ public class Main {
         // ---------------- Map ----------------
         System.out.println("-".repeat(30));
 
-        LinkedHashMap<Integer, String> map1 = new LinkedHashMap<>();
+        Map<Integer, String> map1 = new LinkedHashMap<>();
         String[] months = {
                 "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
         };
@@ -78,7 +78,7 @@ public class Main {
         map1.put(5, "ОТПУСК");
         System.out.println("map1: " + map1);
 
-        HashMap<Integer, String> map2 = new HashMap<>();
+        Map<Integer, String> map2 = new HashMap<>();
         map2.putAll(map1);
         System.out.println("map2: " + map2);
 
@@ -86,7 +86,7 @@ public class Main {
         System.out.println();
         printMapEntries(map2);
 
-        HashMap<String, Set<String>> map3 = new HashMap<>();
+        Map<String, Set<String>> map3 = new HashMap<>();
         map3.put("Daniil", set1);
         map3.put("Bob", set2);
         System.out.println("map3: " + map3);
@@ -95,7 +95,7 @@ public class Main {
         // ---------------- User ----------------
         System.out.println("-".repeat(30));
 
-        HashSet<User> userSet = new HashSet<>();
+        Set<User> userSet = new HashSet<>();
         User user1 = new User("Daniil", 20, "+380688774414");
         User user2 = new User("Daniil", 20, "+380688774414");
         User user3 = new User("Daniil", 18, "+380688774414");
