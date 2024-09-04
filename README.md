@@ -1,3 +1,9 @@
+HW9:
+![DZ1](https://github.com/user-attachments/assets/94787795-1a87-4dfa-9f2d-3dd461e59c01)
+![DZ2](https://github.com/user-attachments/assets/134eccb6-1be2-4534-90d2-a7e61e5327d5)
+
+////////////////////////////////////////////////
+
 HW 8:
 ![Street drawio](https://github.com/user-attachments/assets/73c76460-d961-4993-897c-06c044eb35e5)
 ![DZ](https://github.com/user-attachments/assets/f5c23b81-08c7-4e6a-aeff-98d4b536c6e0)
