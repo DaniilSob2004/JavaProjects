@@ -1,3 +1,10 @@
+HW11:
+  - ![1](https://github.com/user-attachments/assets/83477264-6929-453f-ad3b-ca9a50d1ae86)
+  - ![2](https://github.com/user-attachments/assets/921dc45b-b770-40eb-bf09-72cde4980903)
+  - ![3](https://github.com/user-attachments/assets/0e7f624e-94c6-40e7-b5d7-72d61b014b1c)
+
+////////////////////////////////////////////////
+
 HW9:
   - ![DZ1](https://github.com/user-attachments/assets/94787795-1a87-4dfa-9f2d-3dd461e59c01)
   - ![DZ2](https://github.com/user-attachments/assets/134eccb6-1be2-4534-90d2-a7e61e5327d5)
