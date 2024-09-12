@@ -46,7 +46,7 @@ public class RaceCarRunnable extends Car implements Runnable {
                 latch.countDown();
                 finishTime = System.currentTimeMillis() - Race.startRaceTime.get();
                 String formatTime = TimeWork.convertToTime(finishTime);
-                System.out.println("\n----\n" + name + " finished the race in " + formatTime + " ms\n----");
+                System.out.println("\n----\n" + name + " finished the race in " + formatTime + " seconds\n----");
             }
         }
     }
