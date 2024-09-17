@@ -1,3 +1,10 @@
+HW14:
+  - ![1](https://github.com/user-attachments/assets/7502d837-a21c-4bfe-a768-60b1112b1bd2)
+  - ![2](https://github.com/user-attachments/assets/5e4d534e-cd69-4dd5-8d40-c26cd1a1e08c)
+  - ![3](https://github.com/user-attachments/assets/0552d891-fc33-4a9d-89ee-073a0a08e840)
+
+////////////////////////////////////////////////
+
 HW13:
   - ![1](https://github.com/user-attachments/assets/104e3a27-f19d-4329-ae9e-983671ae29f4)
 
