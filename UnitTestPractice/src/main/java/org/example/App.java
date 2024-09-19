@@ -85,5 +85,7 @@ public class App
         // записываем в файлы csv продукты из разного магазина
         writeProductsToFile(atbPathCSVFile, atbProducts);
         writeProductsToFile(silpoPathCSVFile, silpoProducts);
+
+        System.out.println("END!!!");
     }
 }

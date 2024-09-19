@@ -58,8 +58,8 @@ public class ListWorkTest {
     public void getFilteredList_ShouldReturnFilteredList_WhenFilteredByAtb() {
         List<Product> atbProducts = ListWork.getFilteredList(PRODUCTS, p -> p.getTitleShop().equalsIgnoreCase("атб"));
         assertEquals(8, atbProducts.size(), "Must be 8 products from ATB");
-        assertEquals("Сахар", atbProducts.getFirst().getName(), "First product must be 'Sugar'");
-        assertEquals("Вода", atbProducts.getLast().getName(), "Last product must be 'Water'");
+        assertEquals("Сахар", atbProducts.get(0).getName(), "First product must be 'Sugar'");
+        assertEquals("Вода", atbProducts.get(atbProducts.size() - 1).getName(), "Last product must be 'Water'");
     }
 
     @Test
@@ -99,13 +99,13 @@ public class ListWorkTest {
         assertNotNull(products, "Product list should not be null");
         assertEquals(VALID_CSV.size(), products.size(), "Product list should contain " + VALID_CSV.size() + " products");
 
-        Product firstProduct = products.getFirst();
+        Product firstProduct = products.get(0);
         assertEquals("Сильпо", firstProduct.getTitleShop(), "First product's shop should be 'Сильпо'");
         assertEquals("Гречка", firstProduct.getName(), "First product's name should be 'Гречка'");
         assertEquals(30.25, firstProduct.getPrice(), 0.01, "First product's price should be 30.25");
         assertEquals(120, firstProduct.getQuantity(), "First product's quantity should be 120");
 
-        Product secondProduct = products.getLast();
+        Product secondProduct = products.get(products.size() - 1);
         assertEquals("АТБ", secondProduct.getTitleShop(), "Second product's shop should be 'АТБ'");
         assertEquals("Гречка", secondProduct.getName(), "Second product's name should be 'Гречка'");
         assertEquals(31.25, secondProduct.getPrice(), 0.01, "Second product's price should be 31.25");
