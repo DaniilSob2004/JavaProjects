@@ -1,3 +1,10 @@
+HW15:
+  - ![1](https://github.com/user-attachments/assets/4dead391-541f-43c0-ad43-a7d3269c07f2)
+  - ![2](https://github.com/user-attachments/assets/7f3c28aa-9467-4c01-a10d-4f3c55f066b7)
+  - ![3](https://github.com/user-attachments/assets/df220f82-4441-4e4e-bd34-ceebb92f6f81)
+
+////////////////////////////////////////////////
+
 HW14:
   - ![1](https://github.com/user-attachments/assets/7502d837-a21c-4bfe-a768-60b1112b1bd2)
   - ![2](https://github.com/user-attachments/assets/5e4d534e-cd69-4dd5-8d40-c26cd1a1e08c)
