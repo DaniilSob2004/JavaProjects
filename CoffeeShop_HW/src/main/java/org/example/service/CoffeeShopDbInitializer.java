@@ -32,7 +32,6 @@ import java.util.List;
 public class CoffeeShopDbInitializer {
     private CoffeeShopDbInitializer() {}
 
-
     public static void createTables() {
         try {
             Connection conn = ConnectionFactory.getInstance().makeConnection();
@@ -51,23 +50,6 @@ public class CoffeeShopDbInitializer {
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
-
-            /*try (Stream<String> lineStream = Files.lines(Paths.get(SQL_SCRIPT_CREATE_TABLES))) {
-                StringBuilder createTablesQuery = new StringBuilder();
-
-                for (var currentString : lineStream.toList()) {
-                    createTablesQuery.append(currentString).append(" ");
-                }
-
-                try (PreparedStatement ps = conn.prepareStatement(createTablesQuery.toString())) {
-                    ps.execute();
-                }
-                System.out.println("Create tables successfully...");
-            } catch (IOException exception) {
-                throw new FileException("Error with createTables.sql...");
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }*/
         } catch (ConnectionDBException | FileException e) {
             System.err.println(e.getMessage());
         }
@@ -288,16 +270,5 @@ public class CoffeeShopDbInitializer {
         personalScheduleDao.saveMany(personalSchedules);
 
         System.out.println("PersonalSchedules created successfully...");
-    }
-
-
-    private static boolean tableExists(String tableName) throws ConnectionDBException {
-        try (Connection connection = ConnectionFactory.getInstance().makeConnection()) {
-            DatabaseMetaData meta = connection.getMetaData();
-            ResultSet resultSet = meta.getTables(null, null, tableName, new String[]{"TABLE"});
-            return resultSet.next();
-        } catch (SQLException exception) {
-            throw new ConnectionDBException("Error connection to DB...");
-        }
     }
 }
