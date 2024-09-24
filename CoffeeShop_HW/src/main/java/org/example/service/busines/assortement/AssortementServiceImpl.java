@@ -33,6 +33,11 @@ public class AssortementServiceImpl implements AssortementService {
     }
 
     @Override
+    public Assortement getAssortementsById(int id) {
+        return assortementDao.getAssortementById(id);
+    }
+
+    @Override
     public boolean deleteAssortementById(int id) {
         Assortement assortement = assortementDao.getAssortementById(id);
         if (assortement != null) {

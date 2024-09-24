@@ -1,9 +1,9 @@
 package org.example.dao.clientDAO;
 
 import org.example.dao.ConnectionFactory;
+import org.example.enums.AggregationType;
 import org.example.exception.ConnectionDBException;
 import org.example.model.Client;
-import org.example.model.Personal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +33,15 @@ public class ClientDaoImpl implements ClientDao {
             """;
     private static final String DELETE_ALL_CLIENTS = "DELETE FROM client";
     private static final String DELETE_CLIENT = "DELETE FROM client WHERE client.id = ?";
+    private static final String GET_DISCOUNT = "SELECT %s(discount) FROM client";
+    private static final String GET_BY_BIRTHDAY = "SELECT * FROM client WHERE birthdate = (SELECT %s(birthdate) FROM client)";
+    private static final String GET_BY_BIRTHDAY_TODAY = """
+            SELECT * FROM client
+            WHERE
+                EXTRACT(DAY FROM birthdate) = EXTRACT(DAY FROM CURRENT_DATE) AND
+                EXTRACT(MONTH FROM birthdate) = EXTRACT(MONTH FROM CURRENT_DATE)
+            """;
+    private static final String GET_EMAIL_NULL = "SELECT * FROM client WHERE email IS NULL OR email = ''";
 
 
     @Override
@@ -42,6 +51,61 @@ public class ClientDaoImpl implements ClientDao {
                 .filter(client -> client.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public float getClientDiscount(AggregationType type) {
+        float discount = 0;
+        String query = String.format(GET_DISCOUNT, type.getSqlFunction());
+
+        try (Connection conn = ConnectionFactory.getInstance().makeConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet result = ps.executeQuery()) {
+            if (result.next()) {
+                discount = result.getFloat(1);
+            }
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println(e.getMessage());
+            throw new RuntimeException();
+        }
+        return discount;
+    }
+
+    @Override
+    public Client getClientByBirthday(AggregationType type) {
+        String query = String.format(GET_BY_BIRTHDAY, type.getSqlFunction());
+
+        try (Connection conn = ConnectionFactory.getInstance().makeConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet result = ps.executeQuery()) {
+            if (result.next()) {
+                Client client = new Client();
+                client.setId(result.getInt(1));
+                client.setName(result.getString(2));
+                client.setSurname(result.getString(3));
+                client.setPatronymic(result.getString(4));
+                client.setBirthdate(result.getDate(5).toLocalDate());
+                client.setNumTel(result.getString(6));
+                client.setEmail(result.getString(7));
+                client.setDiscount(result.getInt(8));
+                return client;
+            }
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println(e.getMessage());
+            throw new RuntimeException();
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Client> getClientsByTodayBirthday() {
+        return getClientsByQuery(GET_BY_BIRTHDAY_TODAY);
+    }
+
+    @Override
+    public List<Client> getClientsWithoutEmail() {
+        return getClientsByQuery(GET_EMAIL_NULL);
     }
 
 
@@ -114,28 +178,7 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public List<Client> findAll() {
-        List<Client> resultAddClients = new ArrayList<>();
-        try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(FIND_ALL_CLIENTS);
-             ResultSet result = ps.executeQuery()) {
-
-            while (result.next()) {
-                Client addClient = new Client();
-                addClient.setId(result.getInt(1));
-                addClient.setName(result.getString(2));
-                addClient.setSurname(result.getString(3));
-                addClient.setPatronymic(result.getString(4));
-                addClient.setBirthdate(result.getDate(5).toLocalDate());
-                addClient.setNumTel(result.getString(6));
-                addClient.setEmail(result.getString(7));
-                addClient.setDiscount(result.getInt(8));
-                resultAddClients.add(addClient);
-            }
-            return resultAddClients;
-        } catch (ConnectionDBException | SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return resultAddClients;
+        return getClientsByQuery(FIND_ALL_CLIENTS);
     }
 
     @Override
@@ -146,5 +189,30 @@ public class ClientDaoImpl implements ClientDao {
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+
+    private List<Client> getClientsByQuery(String query) {
+        List<Client> clients = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getInstance().makeConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet result = ps.executeQuery()) {
+            while (result.next()) {
+                Client client = new Client();
+                client.setId(result.getInt(1));
+                client.setName(result.getString(2));
+                client.setSurname(result.getString(3));
+                client.setPatronymic(result.getString(4));
+                client.setBirthdate(result.getDate(5).toLocalDate());
+                client.setNumTel(result.getString(6));
+                client.setEmail(result.getString(7));
+                client.setDiscount(result.getInt(8));
+                clients.add(client);
+            }
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return clients;
     }
 }

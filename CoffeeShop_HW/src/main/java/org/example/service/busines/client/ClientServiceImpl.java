@@ -3,6 +3,7 @@ package org.example.service.busines.client;
 import lombok.*;
 
 import org.example.dao.clientDAO.ClientDao;
+import org.example.enums.AggregationType;
 import org.example.model.Client;
 
 import java.util.List;
@@ -47,5 +48,33 @@ public class ClientServiceImpl implements ClientService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public float getClientDiscount(AggregationType type) {
+        return clientDao.getClientDiscount(type);
+    }
+
+    @Override
+    public List<Client> getClientsByDiscount(int discount) {
+        List<Client> clientsAll = clientDao.findAll();
+        return clientsAll.stream()
+                .filter(c -> c.getDiscount() == discount)
+                .toList();
+    }
+
+    @Override
+    public Client getClientByBirthday(AggregationType type) {
+        return clientDao.getClientByBirthday(type);
+    }
+
+    @Override
+    public List<Client> getClientsByTodayBirthday() {
+        return clientDao.getClientsByTodayBirthday();
+    }
+
+    @Override
+    public List<Client> getClientsWithoutEmail() {
+        return clientDao.getClientsWithoutEmail();
     }
 }

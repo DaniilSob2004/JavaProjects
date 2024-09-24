@@ -174,7 +174,7 @@ public class CoffeeShopDbInitializer {
         List<Client> clientsAll = clientDao.findAll();
 
         List<Order> orders = new ArrayList<>();
-        for (int i = 0; i < TestUtils.getRandomInteger(8, 12); i++) {
+        for (int i = 0; i < TestUtils.getRandomInteger(8, 10); i++) {
             LocalDate orderDate = TestUtils.getRandomDate();
             int idClient = clientsAll.get(TestUtils.getRandomInteger(0, clientsAll.size())).getId();
             orders.add(new Order(0, orderDate, idClient));
@@ -193,7 +193,7 @@ public class CoffeeShopDbInitializer {
         List<Assortement> assortementsAll = assortementDao.findAll();
 
         List<OrderItem> orderItems = new ArrayList<>();
-        for (int i = 0; i < TestUtils.getRandomInteger(10, 15); i++) {
+        for (int i = 0; i < TestUtils.getRandomInteger(20, 25); i++) {
             int orderId = ordersAll.get(TestUtils.getRandomInteger(0, ordersAll.size())).getId();
             int idAssortement = assortementsAll.get(TestUtils.getRandomInteger(0, assortementsAll.size())).getId();
             int quantity = TestUtils.getRandomInteger(1, 5);

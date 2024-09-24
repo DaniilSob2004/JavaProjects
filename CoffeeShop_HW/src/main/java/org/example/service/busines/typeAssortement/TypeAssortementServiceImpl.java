@@ -18,6 +18,15 @@ public class TypeAssortementServiceImpl implements TypeAssortementService {
     }
 
     @Override
+    public TypeAssortement getTypeAssortementById(int id) {
+        List<TypeAssortement> typeAssortementsAll = getAllTypeAssortement();
+        return typeAssortementsAll.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Тип ассортимента по id не найден..."));
+    }
+
+    @Override
     public TypeAssortement getTypeAssortementByName(String name) {
         List<TypeAssortement> typeAssortementsAll = getAllTypeAssortement();
         return typeAssortementsAll.stream()

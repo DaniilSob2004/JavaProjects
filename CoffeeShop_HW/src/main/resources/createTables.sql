@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS public.Assortement
     nameRu VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     idType INT,
-    FOREIGN KEY (idType) REFERENCES public.TypeAssortement(id) ON DELETE CASCADE
+    FOREIGN KEY (idType) REFERENCES public.TypeAssortement(id)
 );
 
 CREATE TABLE IF NOT EXISTS public.PersonalPosition
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS public.Personal
     numTel VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
     idPosition INT,
-    FOREIGN KEY (idPosition) REFERENCES public.PersonalPosition(id) ON DELETE CASCADE
+    FOREIGN KEY (idPosition) REFERENCES public.PersonalPosition(id)
 );
 
 CREATE TABLE IF NOT EXISTS public.Client
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS public."Order"
     id SERIAL PRIMARY KEY,
     orderDate DATE NOT NULL,
     idClient INT,
-    FOREIGN KEY (idClient) REFERENCES public.Client(id) ON DELETE CASCADE
+    FOREIGN KEY (idClient) REFERENCES public.Client(id)
 );
 
 CREATE TABLE IF NOT EXISTS public.OrderItem
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS public.OrderItem
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (idOrder) REFERENCES public."Order"(id),
-    FOREIGN KEY (idAssortement) REFERENCES public.Assortement(id) ON DELETE CASCADE
+    FOREIGN KEY (idAssortement) REFERENCES public.Assortement(id)
 );
 
 CREATE TABLE IF NOT EXISTS public.PersonalSchedule
@@ -70,5 +70,5 @@ CREATE TABLE IF NOT EXISTS public.PersonalSchedule
     workDate DATE NOT NULL,
     startTime TIME NOT NULL,
     endTime TIME NOT NULL,
-    FOREIGN KEY (idPersonal) REFERENCES public.Personal(id) ON DELETE CASCADE
+    FOREIGN KEY (idPersonal) REFERENCES public.Personal(id)
 )

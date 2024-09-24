@@ -14,7 +14,7 @@ public class TestUtils {
     public static final int CURRENT_YEAR = Year.now().getValue();
 
     public static LocalDate getRandomDate() {
-        long minDay = LocalDate.of(1950, 1, 1).toEpochDay();
+        long minDay = LocalDate.of(1975, 1, 1).toEpochDay();
         long maxDay = LocalDate.of(CURRENT_YEAR, 12, 31).toEpochDay();
         long randDay = RAND.nextLong(minDay, maxDay);
         return LocalDate.ofEpochDay(randDay);

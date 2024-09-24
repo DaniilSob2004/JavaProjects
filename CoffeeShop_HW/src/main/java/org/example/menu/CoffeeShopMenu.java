@@ -2,14 +2,21 @@ package org.example.menu;
 
 import org.example.dao.assortementDAO.AssortementDaoImpl;
 import org.example.dao.clientDAO.ClientDaoImpl;
+import org.example.dao.orderDAO.OrderDaoImpl;
+import org.example.dao.orderItemDAO.OrderItemDaoImpl;
 import org.example.dao.personalDAO.PersonalDaoImpl;
 import org.example.dao.personalPositionDAO.PersonalPositionDaoImpl;
 import org.example.dao.typeAssortementDAO.TypeAssortementDaoImpl;
+import org.example.enums.AggregationType;
 import org.example.model.*;
 import org.example.service.busines.assortement.AssortementService;
 import org.example.service.busines.assortement.AssortementServiceImpl;
 import org.example.service.busines.client.ClientService;
 import org.example.service.busines.client.ClientServiceImpl;
+import org.example.service.busines.order.OrderService;
+import org.example.service.busines.order.OrderServiceImpl;
+import org.example.service.busines.orderItems.OrderItemService;
+import org.example.service.busines.orderItems.OrderItemServiceImpl;
 import org.example.service.busines.personal.PersonalService;
 import org.example.service.busines.personal.PersonalServiceImpl;
 import org.example.service.busines.personalPosition.PersonalPositionService;
@@ -17,17 +24,18 @@ import org.example.service.busines.personalPosition.PersonalPositionServiceImpl;
 import org.example.service.busines.typeAssortement.TypeAssortementService;
 import org.example.service.busines.typeAssortement.TypeAssortementServiceImpl;
 import org.example.utils.Input;
-import org.example.utils.TestUtils;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class CoffeeShopMenu {
-    private static TypeAssortementService typeAssortementService;
-    private static AssortementService assortementService;
-    private static ClientService clientService;
-    private static PersonalPositionService personalPositionService;
-    private static PersonalService personalService;
+    private static final TypeAssortementService typeAssortementService;
+    private static final AssortementService assortementService;
+    private static final ClientService clientService;
+    private static final PersonalPositionService personalPositionService;
+    private static final PersonalService personalService;
+    private static final OrderService orderService;
+    private static final OrderItemService orderItemService;
 
     static {
         typeAssortementService = new TypeAssortementServiceImpl(new TypeAssortementDaoImpl());
@@ -35,6 +43,8 @@ public class CoffeeShopMenu {
         clientService = new ClientServiceImpl(new ClientDaoImpl());
         personalPositionService = new PersonalPositionServiceImpl(new PersonalPositionDaoImpl());
         personalService = new PersonalServiceImpl(new PersonalDaoImpl());
+        orderService = new OrderServiceImpl(new OrderDaoImpl());
+        orderItemService = new OrderItemServiceImpl(new OrderItemDaoImpl());
     }
 
 
@@ -51,74 +61,6 @@ public class CoffeeShopMenu {
                 ShowMenu.MIN_MENU_NUM,
                 maxChoice
         );
-    }
-
-    public boolean execute(int choiceMenu) {
-        switch (choiceMenu) {
-            case 1:
-                menuItem1Execute();
-                break;
-
-            case 2:
-                menuItem2Execute();
-                break;
-
-            case 3:
-                menuItem3Execute();
-                break;
-
-            case 4:
-                menuItem4Execute();
-                break;
-
-            case 5:
-                menuItem5Execute();
-                break;
-
-            case 6:
-                menuItem6Execute();
-                break;
-
-            case 7:
-                menuItem7Execute();
-                break;
-
-            case 8:
-                menuItem8Execute();
-                break;
-
-            case 9:
-                menuItem9Execute();
-                break;
-
-            case 10:
-                menuItem10Execute();
-                break;
-
-            case 11:
-                menuItem11Execute();
-                break;
-
-            case 12:
-                menuItem12Execute();
-                break;
-
-            case 13:
-                menuItem13Execute();
-                break;
-
-            case 14:
-                menuItem14Execute();
-                break;
-
-            case 15:
-                menuItem15Execute();
-                break;
-
-            default:
-                return false;
-        }
-        return true;
     }
 
 
@@ -179,23 +121,7 @@ public class CoffeeShopMenu {
         String surname = Input.inputString("Введите фамилию: ", "Не должно быть пустым...");
         String patronymic = Input.inputString("Введите отчество: ", "Не должно быть пустым...");
 
-        System.out.println("Дата рождения:");
-        int day = Input.inputInteger(
-                "Введите число: ",
-                "Неверный ввод, нужно от 1 до 31",
-                1, 31
-        );
-        int month = Input.inputInteger(
-                "Введите месяц: ",
-                "Неверный ввод, нужно от 1 до 12",
-                1, 12
-        );
-        int year = Input.inputInteger(
-                "Введите год: ",
-                "Неверный ввод, нужно от 1900 до " + (TestUtils.CURRENT_YEAR - 10),
-                1, (TestUtils.CURRENT_YEAR - 10)
-        );
-        LocalDate birthday = LocalDate.of(year, month, day);
+        LocalDate birthday = Input.inputDate("Дата рождения:");
 
         String numTel = Input.inputString("Введите номер телефона: ", "Не должно быть пустым...");
         String email = Input.inputString("Введите email: ", "Не должно быть пустым...");
@@ -341,6 +267,240 @@ public class CoffeeShopMenu {
         personals.forEach(System.out::println);
     }
 
+    public static void menuItem16Execute() {
+        // Минимальная скидка для клиента
+
+        float minDiscount = clientService.getClientDiscount(AggregationType.MIN);
+        System.out.println("Минимальная скидка для клиента: " + minDiscount + "%");
+    }
+
+    public static void menuItem17Execute() {
+        // Максимальная скидка для клиента
+
+        float maxDiscount = clientService.getClientDiscount(AggregationType.MAX);
+        System.out.println("Максимальная скидка для клиента: " + maxDiscount + "%");
+    }
+
+    public static void menuItem18Execute() {
+        // Клиенты с минимальной скидкой
+        showClientsByDiscount(AggregationType.MIN, "минимальной");
+    }
+
+    public static void menuItem19Execute() {
+        // Клиенты с максимальной скидкой
+        showClientsByDiscount(AggregationType.MAX, "максимальной");
+    }
+
+    public static void menuItem20Execute() {
+        // Средняя величина скидки клиентов
+
+        float avgDiscount = clientService.getClientDiscount(AggregationType.AVG);
+        System.out.println("Средняя скидка клиентов: " + avgDiscount + "%");
+    }
+
+    public static void menuItem21Execute() {
+        // Самый молодой клиент
+
+        Client client = clientService.getClientByBirthday(AggregationType.MAX);
+        String text = client == null ? "Молодого клиента не найдено..." : client.toString();
+        System.out.println(text);
+    }
+
+    public static void menuItem22Execute() {
+        // Самый возрастной клиент
+
+        Client client = clientService.getClientByBirthday(AggregationType.MIN);
+        String text = client == null ? "Возрастного клиента не найдено..." : client.toString();
+        System.out.println(text);
+    }
+
+    public static void menuItem23Execute() {
+        // Клиенты др в этот день
+
+        List<Client> clients = clientService.getClientsByTodayBirthday();
+        if (clients.isEmpty()) {
+            System.out.println("Клиентов не найденно...");
+        }
+        else {
+            clients.forEach(System.out::println);
+        }
+    }
+
+    public static void menuItem24Execute() {
+        // Клиенты у которых нет email
+
+        List<Client> clients = clientService.getClientsWithoutEmail();
+        if (clients.isEmpty()) {
+            System.out.println("Клиентов не найденно...");
+        }
+        else {
+            clients.forEach(System.out::println);
+        }
+    }
+
+    public static void menuItem25Execute() {
+        // Заказы в конкретную дату
+
+        LocalDate orderDate = Input.inputDate("Дата заказа:");
+        List<Order> orders = orderService.getOrdersByOrderDate(orderDate);
+        if (orders.isEmpty()) {
+            System.out.println("Заказы по дате не найденно...");
+        }
+        else {
+            orders.forEach(System.out::println);
+        }
+    }
+
+    public static void menuItem26Execute() {
+        // Заказы в промежутке дат
+
+        LocalDate fromOrderDate = Input.inputDate("От какой даты:");
+        LocalDate toOrderDate = Input.inputDate("До какой даты:");
+
+        List<Order> orders = orderService.getOrdersByBetweenOrderDate(fromOrderDate, toOrderDate);
+        if (orders.isEmpty()) {
+            System.out.println("Заказы в диапазоне дат не найденно...");
+        }
+        else {
+            orders.forEach(System.out::println);
+        }
+    }
+
+    public static void menuItem27Execute() {
+        // Заказы кол-ва десертов по дате
+        executeOrderCountByType("десерт");
+    }
+
+    public static void menuItem28Execute() {
+        // Заказы кол-ва напитков по дате
+        executeOrderCountByType("напиток");
+    }
+
+
+    public boolean execute(int choiceMenu) {
+        switch (choiceMenu) {
+            case 1:
+                menuItem1Execute();
+                break;
+            case 2:
+                menuItem2Execute();
+                break;
+            case 3:
+                menuItem3Execute();
+                break;
+            case 4:
+                menuItem4Execute();
+                break;
+            case 5:
+                menuItem5Execute();
+                break;
+            case 6:
+                menuItem6Execute();
+                break;
+            case 7:
+                menuItem7Execute();
+                break;
+            case 8:
+                menuItem8Execute();
+                break;
+            case 9:
+                menuItem9Execute();
+                break;
+            case 10:
+                menuItem10Execute();
+                break;
+            case 11:
+                menuItem11Execute();
+                break;
+            case 12:
+                menuItem12Execute();
+                break;
+            case 13:
+                menuItem13Execute();
+                break;
+            case 14:
+                menuItem14Execute();
+                break;
+            case 15:
+                menuItem15Execute();
+                break;
+            case 16:
+                menuItem16Execute();
+                break;
+            case 17:
+                menuItem17Execute();
+                break;
+            case 18:
+                menuItem18Execute();
+                break;
+            case 19:
+                menuItem19Execute();
+                break;
+            case 20:
+                menuItem20Execute();
+                break;
+            case 21:
+                menuItem21Execute();
+                break;
+            case 22:
+                menuItem22Execute();
+                break;
+            case 23:
+                menuItem23Execute();
+                break;
+            case 24:
+                menuItem24Execute();
+                break;
+            case 25:
+                menuItem25Execute();
+                break;
+            case 26:
+                menuItem26Execute();
+                break;
+            case 27:
+                menuItem27Execute();
+                break;
+            case 28:
+                menuItem28Execute();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+
+    public static void executeOrderCountByType(String assortmentType) {
+        LocalDate orderDate = Input.inputDate("Дата заказа:");
+
+        List<Order> orders = orderService.getOrdersByOrderDate(orderDate);
+        if (orders.isEmpty()) {
+            System.out.println("Заказы по дате не найдены...");
+            return;
+        }
+
+        List<OrderItem> orderItems = orderItemService.getOrderItemsByOrdersId(orders);
+        if (orderItems.isEmpty()) {
+            System.out.println("Заказы по дате не найдены...");
+            return;
+        }
+
+        List<OrderItem> orderItemsByType = orderItemService.getOrderItemsByTypeAssortement(orderItems, assortmentType);
+        System.out.println("Кол-во заказов " + assortmentType + ": " + orderItemsByType.size());
+    }
+
+    public static void showClientsByDiscount(AggregationType type, String discountTypeName) {
+        float discount = clientService.getClientDiscount(type);
+        List<Client> clients = clientService.getClientsByDiscount((int)discount);
+
+        if (clients.isEmpty()) {
+            System.out.println("Клиенты с " + discountTypeName + " скидкой не найдены...");
+        }
+        else {
+            System.out.println("Клиенты с " + discountTypeName + " скидкой (" + discount + "%):");
+            clients.forEach(System.out::println);
+        }
+    }
 
     private static void addPersonal(String positionName) {
         // информация о персонале

@@ -7,5 +7,6 @@ import java.util.List;
 public interface AssortementService {
     void addAssortement(Assortement assortement);
     List<Assortement> getAssortementsByType(String type);
+    Assortement getAssortementsById(int id);
     boolean deleteAssortementById(int id);
 }
