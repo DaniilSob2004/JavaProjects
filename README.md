@@ -1,4 +1,11 @@
-HW16:
+HW CoffeeShop Part2:
+  - ![1](https://github.com/user-attachments/assets/4dd225c6-6a8f-48aa-886f-684143a4da9c)
+  - ![2](https://github.com/user-attachments/assets/a82bb25f-f57e-4eb1-972e-d6237740f4e0)
+  - ![3](https://github.com/user-attachments/assets/06bf5c51-ea1c-48da-82a3-b0e025584be9)
+
+////////////////////////////////////////////////
+
+HW CoffeeShop:
   - ![1](https://github.com/user-attachments/assets/af348ae5-290b-46fb-afea-a74d396a8a65)
   - ![2](https://github.com/user-attachments/assets/8d1596ad-d2a2-4bb1-af4f-738caf052f2f)
   - ![3](https://github.com/user-attachments/assets/b2893a18-7652-4b57-8fa0-362e9da2efa0)
