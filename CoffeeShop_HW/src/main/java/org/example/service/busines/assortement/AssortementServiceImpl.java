@@ -33,7 +33,7 @@ public class AssortementServiceImpl implements AssortementService {
     }
 
     @Override
-    public Assortement getAssortementsById(int id) {
+    public Assortement getAssortementById(int id) {
         return assortementDao.getAssortementById(id);
     }
 

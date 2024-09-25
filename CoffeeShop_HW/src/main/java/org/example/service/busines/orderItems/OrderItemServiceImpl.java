@@ -42,7 +42,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 
         return orderItems.stream()
                 .filter(item -> {
-                    Assortement assortement = assortementService.getAssortementsById(item.getIdAssortement());
+                    Assortement assortement = assortementService.getAssortementById(item.getIdAssortement());
                     TypeAssortement type = typeAssortementService.getTypeAssortementById(assortement.getIdTypeAssortement());
                     return type.getName().equalsIgnoreCase(findType);
                 })

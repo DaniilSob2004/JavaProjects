@@ -29,10 +29,10 @@ public class TypeAssortementDaoImpl implements TypeAssortementDao {
     private static final String DELETE_TYPE_ASSORTEMENT = "DELETE FROM typeassortement WHERE typeassortement.id = ?";
 
     @Override
-    public void save(TypeAssortement typeAssortements) {
+    public void save(TypeAssortement typeAssortement) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement(SAVE_TYPE_ASSORTEMENT)) {
-            ps.setString(1, typeAssortements.getName());
+            ps.setString(1, typeAssortement.getName());
             ps.execute();
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
