@@ -1,3 +1,8 @@
+HW AutoBase Part_1:
+  - ![Autobase_DB_UML](https://github.com/user-attachments/assets/56b17b3e-7e20-498c-81e7-11657b9f0ab1)
+
+////////////////////////////////////////////////
+
 HW CoffeeShop Part2:
   - ![1](https://github.com/user-attachments/assets/4dd225c6-6a8f-48aa-886f-684143a4da9c)
   - ![2](https://github.com/user-attachments/assets/a82bb25f-f57e-4eb1-972e-d6237740f4e0)
