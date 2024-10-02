@@ -1,0 +1,1 @@
+INSERT INTO public.ticket_status (status_name) VALUES ('FREE'), ('SOLD');
