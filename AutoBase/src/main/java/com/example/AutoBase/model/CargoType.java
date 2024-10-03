@@ -5,6 +5,8 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "cargotype")
 public class CargoType {
 

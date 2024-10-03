@@ -5,6 +5,8 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "driver")
 public class Driver {
 

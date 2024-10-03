@@ -1,4 +1,4 @@
-package com.example.AutoBase.service.cityservice;
+package com.example.AutoBase.service.busines.cityservice;
 
 import com.example.AutoBase.model.City;
 import java.util.List;

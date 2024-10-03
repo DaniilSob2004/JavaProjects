@@ -5,7 +5,9 @@ import lombok.*;
 
 @Entity
 @Data
-@Table(name = "order")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id

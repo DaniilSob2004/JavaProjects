@@ -1,4 +1,4 @@
-package com.example.AutoBase.service.cargotypeservice;
+package com.example.AutoBase.service.busines.cargotypeservice;
 
 import com.example.AutoBase.model.CargoType;
 import java.util.List;

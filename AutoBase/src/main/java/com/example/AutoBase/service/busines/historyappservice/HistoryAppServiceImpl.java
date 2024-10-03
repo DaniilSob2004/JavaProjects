@@ -1,4 +1,4 @@
-package com.example.AutoBase.service.historyappservice;
+package com.example.AutoBase.service.busines.historyappservice;
 
 import com.example.AutoBase.dao.historyApp.HistoryAppRepository;
 import com.example.AutoBase.model.HistoryApp;

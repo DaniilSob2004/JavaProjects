@@ -11,3 +11,10 @@ spring:
     password: admin
     schemas: public
     url: jdbc:postgresql://localhost:5437/AutoBase
+
+data:
+  cities: src/main/resources/cities.txt
+  cars: src/main/resources/cars.txt
+  names: src/main/resources/names.txt
+  lastnames: src/main/resources/lastnames.txt
+  cargoTypes: src/main/resources/cargoTypes.txt

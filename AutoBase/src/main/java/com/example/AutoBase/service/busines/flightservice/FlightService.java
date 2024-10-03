@@ -1,4 +1,4 @@
-package com.example.AutoBase.service.flightservice;
+package com.example.AutoBase.service.busines.flightservice;
 
 import com.example.AutoBase.model.Flight;
 import java.util.List;
