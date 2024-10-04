@@ -1,3 +1,12 @@
+HW LOG_REST:
+  - ![1](https://github.com/user-attachments/assets/07d2eebe-0b8d-45cf-b852-b65a8b624476)
+  - ![2](https://github.com/user-attachments/assets/e6e02ad7-aad7-4ffb-bedf-5237e828ba0c)
+  - ![3](https://github.com/user-attachments/assets/7191b0a6-4939-42a6-9057-95e7e9a971d7)
+  - ![4](https://github.com/user-attachments/assets/eed122e7-b355-428b-9f7c-a831704499fb)
+  - ![5](https://github.com/user-attachments/assets/12a7c6ac-503f-470a-862d-3c18802971ec)
+
+////////////////////////////////////////////////
+
 HW AutoBase Part_1:
   - ![Autobase_DB_UML](https://github.com/user-attachments/assets/56b17b3e-7e20-498c-81e7-11657b9f0ab1)
 
