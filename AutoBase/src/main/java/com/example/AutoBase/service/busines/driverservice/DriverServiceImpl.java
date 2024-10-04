@@ -5,7 +5,9 @@ import com.example.AutoBase.model.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DriverServiceImpl implements DriverService {
@@ -43,5 +45,13 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public void deleteAll() {
         driverRepository.deleteAll();
+    }
+
+
+    @Override
+    public Optional<Driver> findFreeDriverByExperience(int experience) {
+        return driverRepository.findFreeDriversByExperience(experience)
+                .stream()
+                .min(Comparator.comparing(Driver::getExperience));
     }
 }

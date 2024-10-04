@@ -1,7 +1,11 @@
 package com.example.AutoBase.service.busines.driverservice;
 
 import com.example.AutoBase.model.Driver;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
+import java.util.Optional;
 
 public interface DriverService {
     void save(Driver driver);
@@ -10,4 +14,6 @@ public interface DriverService {
     void delete(Driver driver);
     List<Driver> findAll();
     void deleteAll();
+
+    Optional<Driver> findFreeDriverByExperience(int experience);
 }
