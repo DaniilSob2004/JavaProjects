@@ -39,6 +39,8 @@ public class AppStarter {
                 System.out.println("Driver found: " + driver.getId() + " - " + driver.getName() + " - " + driver.getExperience());
             }
 
+            System.out.println("-".repeat(20));
+
             Car car = carService.findFreeCarByCarrying(400).orElse(null);
             if (car == null) {
                 System.out.println("Car not found...");

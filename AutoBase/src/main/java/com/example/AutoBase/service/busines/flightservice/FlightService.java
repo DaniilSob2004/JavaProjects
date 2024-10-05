@@ -10,4 +10,7 @@ public interface FlightService {
     void delete(Flight flight);
     List<Flight> findAll();
     void deleteAll();
+
+    void passedOneDayWay(Flight flight);
+    boolean flightBeenCompletedNow(Flight flight);
 }

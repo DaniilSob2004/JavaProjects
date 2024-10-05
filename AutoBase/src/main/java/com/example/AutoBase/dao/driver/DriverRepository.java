@@ -15,4 +15,6 @@ import java.util.Optional;
 public interface DriverRepository extends JpaRepository<Driver, Integer> {
     @Query("SELECT d FROM Driver d WHERE d.experience >= :experience AND d.isFree = true")
     List<Driver> findFreeDriversByExperience(@Param("experience") int experience);
+
+    Optional<Driver> findById(int driverId);
 }

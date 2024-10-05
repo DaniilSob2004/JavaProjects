@@ -44,4 +44,19 @@ public class FlightServiceImpl implements FlightService {
     public void deleteAll() {
         flightRepository.deleteAll();
     }
+
+
+    @Override
+    public void passedOneDayWay(Flight flight) {
+        int curDay = flight.getCountDayWay();
+        if (curDay > 0) {
+            flight.setCountDayWay(curDay - 1);
+            flightRepository.save(flight);
+        }
+    }
+
+    @Override
+    public boolean flightBeenCompletedNow(Flight flight) {
+        return flight.getCountDayWay() <= 0;
+    }
 }

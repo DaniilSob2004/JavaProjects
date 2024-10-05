@@ -54,4 +54,14 @@ public class DriverServiceImpl implements DriverService {
                 .stream()
                 .min(Comparator.comparing(Driver::getExperience));
     }
+
+    @Override
+    public void accrualOfMoney(Driver driver, float money) {
+        if (money <= 0) {
+            System.err.println("Money must be greater than zero...");
+            return;
+        }
+        driver.setTotalSum(driver.getTotalSum() + money);
+        driverRepository.save(driver);
+    }
 }
