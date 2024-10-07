@@ -10,7 +10,6 @@ import com.example.AutoBase.service.busines.carservice.CarService;
 import com.example.AutoBase.service.busines.driverservice.DriverService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,9 +41,9 @@ public class AppStarter {
         log.info("ApplicationRunner has started");
         return args -> {
             System.out.println("-".repeat(20));
-            autoBaseInitializer.autoBaseInitialize();
+            //autoBaseInitializer.autoBaseInitialize();
 
-            Driver driver = driverService.findFreeDriverByExperience(5).orElse(null);
+            /*Driver driver = driverService.findFreeDriverByExperience(5).orElse(null);
             if (driver == null) {
                 System.out.println("Driver not found...");
             }
@@ -62,7 +61,7 @@ public class AppStarter {
                 System.out.println("Car found: " + car.getId() + " - " + car.getName() + " - " + car.getCarrying());
             }
 
-            System.out.println("-".repeat(20));
+            System.out.println("-".repeat(20));*/
         };
     }
 }

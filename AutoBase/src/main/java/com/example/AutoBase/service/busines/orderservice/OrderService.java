@@ -1,6 +1,10 @@
 package com.example.AutoBase.service.busines.orderservice;
 
+import com.example.AutoBase.dto.OrderDto;
+import com.example.AutoBase.dto.OrderFilterDto;
 import com.example.AutoBase.model.Order;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 public interface OrderService {
@@ -13,4 +17,6 @@ public interface OrderService {
 
     float getTotalPrice(Order order);
     List<Order> findNewOrders();
+    List<OrderDto> findAllDto();
+    List<OrderDto> findByFilter(OrderFilterDto filterDto);
 }

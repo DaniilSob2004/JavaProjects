@@ -1,18 +1,26 @@
 package com.example.AutoBase.service.busines.orderservice;
 
+import com.example.AutoBase.convert.ConvertToTDO;
 import com.example.AutoBase.dao.order.OrderRepository;
+import com.example.AutoBase.dto.OrderDto;
+import com.example.AutoBase.dto.OrderFilterDto;
 import com.example.AutoBase.model.CargoType;
 import com.example.AutoBase.model.Order;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private ConvertToTDO convertToTDO;
 
 
     @Override
@@ -59,5 +67,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findNewOrders() {
         return orderRepository.findByFlightIsFalse();
+    }
+
+    @Override
+    public List<OrderDto> findAllDto() {
+        return getOrderDto(orderRepository.findAll());
+    }
+
+    @Override
+    public List<OrderDto> findByFilter(OrderFilterDto filterDto) {
+        return getOrderDto(orderRepository.findByFilter(filterDto));
+    }
+
+
+    private List<OrderDto> getOrderDto(List<Order> orders) {
+        return orders.stream()
+                .map(convertToTDO::convertToOrderDTO)
+                .collect(Collectors.toList());
     }
 }

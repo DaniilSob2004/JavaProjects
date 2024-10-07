@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CargoTypeServiceImpl implements CargoTypeService {
@@ -43,5 +44,11 @@ public class CargoTypeServiceImpl implements CargoTypeService {
     @Override
     public void deleteAll() {
         cargoTypeRepository.deleteAll();
+    }
+
+
+    @Override
+    public Optional<CargoType> findById(int id) {
+        return cargoTypeRepository.findById(id);
     }
 }
