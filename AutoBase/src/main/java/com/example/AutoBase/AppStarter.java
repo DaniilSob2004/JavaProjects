@@ -3,10 +3,14 @@ package com.example.AutoBase;
 import com.example.AutoBase.model.Car;
 import com.example.AutoBase.model.Driver;
 import com.example.AutoBase.service.AutoBaseInitializer;
+import com.example.AutoBase.service.CarBrokeDownService;
+import com.example.AutoBase.service.CompletedFlightService;
+import com.example.AutoBase.service.DepartureFlightService;
 import com.example.AutoBase.service.busines.carservice.CarService;
 import com.example.AutoBase.service.busines.driverservice.DriverService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +27,15 @@ public class AppStarter {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private CompletedFlightService completedFlightService;
+
+    @Autowired
+    private DepartureFlightService departureFlightService;
+
+    @Autowired
+    private CarBrokeDownService carBrokeDownService;
 
     @Bean
     public ApplicationRunner init() {

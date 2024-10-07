@@ -10,4 +10,7 @@ public interface OrderService {
     void delete(Order order);
     List<Order> findAll();
     void deleteAll();
+
+    float getTotalPrice(Order order);
+    List<Order> findNewOrders();
 }

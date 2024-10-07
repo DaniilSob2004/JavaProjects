@@ -6,6 +6,8 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tickets"})
 @ToString(exclude = {"tickets"})
 @Table(name = "customer")

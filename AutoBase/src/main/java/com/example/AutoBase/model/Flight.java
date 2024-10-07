@@ -3,6 +3,8 @@ package com.example.AutoBase.model;
 import javax.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -28,4 +30,7 @@ public class Flight {
 
     @Column(name = "count_day_way", nullable = false)
     private int countDayWay;
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDateTime startDate;
 }

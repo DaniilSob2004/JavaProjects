@@ -2,7 +2,6 @@ package org.example.ticketssystem.menu;
 
 import org.example.ticketssystem.dto.*;
 import org.example.ticketssystem.model.Customer;
-import org.example.ticketssystem.model.Event;
 import org.example.ticketssystem.model.Ticket;
 import org.example.ticketssystem.service.createeventservice.CreateEventServiceImpl;
 import org.example.ticketssystem.service.customerservice.CustomerService;
@@ -141,7 +140,6 @@ public class TicketMenu {
         // вывод Customers
         List<Customer> customers = customerService.findAll();
         customers.forEach(c -> System.out.println(c.getId() + " - " + c.getName() + c.getEmail()));
-
         int customerId = getInputId("Input customer id: ");
 
         // dto для вывода Events
@@ -154,7 +152,6 @@ public class TicketMenu {
                     "Event place name: " + event.getPlaceName()
             );
         });
-
         int eventId = getInputId("Input event id: ");
 
         // получаем свободный Ticket

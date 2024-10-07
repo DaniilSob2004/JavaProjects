@@ -1,6 +1,7 @@
 package com.example.AutoBase.service.busines.orderservice;
 
 import com.example.AutoBase.dao.order.OrderRepository;
+import com.example.AutoBase.model.CargoType;
 import com.example.AutoBase.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteAll() {
         orderRepository.deleteAll();
+    }
+
+
+    @Override
+    public float getTotalPrice(Order order) {
+        CargoType cargoType = order.getCargoType();
+        if (cargoType == null) {
+            return -1;
+        }
+        return cargoType.getPrice() * order.getWeight();
+    }
+
+    @Override
+    public List<Order> findNewOrders() {
+        return orderRepository.findByFlightIsFalse();
     }
 }

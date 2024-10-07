@@ -18,3 +18,6 @@ data:
   names: src/main/resources/names.txt
   lastnames: src/main/resources/lastnames.txt
   cargoTypes: src/main/resources/cargoTypes.txt
+
+value:
+  averageCarSpeed: 100

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title th:utext="${title}"></title>
+    </head>
+    <body>
+        <th:block th:include="/fragments/menu"></th:block>
+
+        <h3>Create customer</h3>
+        <form name='createCustomer' th:action="@{/customer/create}" method='POST'>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type='text' name='name' value=''></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type='text' name='email' value=''></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type='text' name='phone' value=''></td>
+                </tr>
+                <tr>
+                    <td><input name="submit" type="submit" value="Create"/></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
