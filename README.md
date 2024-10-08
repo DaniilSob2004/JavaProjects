@@ -1,3 +1,9 @@
+HW AutoBase:
+  - ![2](https://github.com/user-attachments/assets/003bac46-c934-49dc-97fd-142c04724157)
+  - ![3](https://github.com/user-attachments/assets/7782a6fd-ac7e-4704-80c5-4ef016159756)
+
+////////////////////////////////////////////////
+
 HW LOG_REST:
   - ![1](https://github.com/user-attachments/assets/07d2eebe-0b8d-45cf-b852-b65a8b624476)
   - ![2](https://github.com/user-attachments/assets/e6e02ad7-aad7-4ffb-bedf-5237e828ba0c)
