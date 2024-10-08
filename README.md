@@ -1,6 +1,6 @@
 HW AutoBase:
   - ![2](https://github.com/user-attachments/assets/003bac46-c934-49dc-97fd-142c04724157)
-  - ![3](https://github.com/user-attachments/assets/7782a6fd-ac7e-4704-80c5-4ef016159756)
+  - ![3](https://github.com/user-attachments/assets/835dd27d-1099-4e41-a8e7-7841d4dcd50c)
 
 ////////////////////////////////////////////////
 
