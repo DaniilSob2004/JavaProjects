@@ -22,3 +22,5 @@ data:
 value:
   averageCarSpeed: 100
   title: "My AutoBase"
+  alertTextColorError: "darkred"
+  alertTextColorSuccess: "darkgreen"

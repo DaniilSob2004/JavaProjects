@@ -62,10 +62,16 @@
                             <span th:utext="${orderDto.isFlight} ? 'Yes' : 'No'"></span>
                         </td>
                         <td>
-                            <form th:if="${!orderDto.isFlight}" th:action="@{/order/to-flight}" method="POST">
-                                <input type="hidden" name="orderId" th:value="${orderDto.orderId}"/>
-                                <button type="submit" class="btn btn-success">To flight</button>
-                            </form>
+                            <div class="d-flex" th:if="${!orderDto.isFlight}">
+                                <form th:action="@{/order/to-flight}" method="POST">
+                                    <input type="hidden" name="orderId" th:value="${orderDto.orderId}"/>
+                                    <button type="submit" class="btn btn-success">To flight</button>
+                                </form>
+                                <form class="ms-1" th:action="@{/order/delete}" method="POST">
+                                    <input type="hidden" name="orderId" th:value="${orderDto.orderId}"/>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
                             <div th:if="${orderDto.isFlight}">
                                 <span>✅</span>
                             </div>

@@ -2,6 +2,7 @@ package com.example.AutoBase.controller;
 
 import com.example.AutoBase.dto.*;
 import com.example.AutoBase.exceptions.*;
+import com.example.AutoBase.model.Order;
 import com.example.AutoBase.service.CreateOrderService;
 import com.example.AutoBase.service.DepartureFlightService;
 import com.example.AutoBase.service.busines.cargotypeservice.CargoTypeService;
@@ -24,6 +25,13 @@ public class OrderController {
 
     @Value("${value.title}")
     private String pageTitle;
+
+    @Value("${value.alertTextColorError}")
+    private String alertTextColorError;
+
+    @Value("${value.alertTextColorSuccess}")
+    private String alertTextColorSuccess;
+
 
     @Autowired
     private OrderService orderService;
@@ -65,17 +73,17 @@ public class OrderController {
     }
 
     @PostMapping(value = "order/create")
-    public String createOrder(OrderCreateDto orderCreateDto, Model model, RedirectAttributes redirectAttributes) {
+    public String createOrder(@ModelAttribute OrderCreateDto orderCreateDto, Model model, RedirectAttributes redirectAttributes) {
         System.out.println(orderCreateDto.toString());
 
         MessageDto messageDto = new MessageDto();
         try {
             createOrderService.createOrder(orderCreateDto);  // создаём заявку
             messageDto.setMessage("Order successfully created");
-            messageDto.setColor("darkgreen");
+            messageDto.setColor(alertTextColorSuccess);
         } catch (CityIsNotFoundByIdException | CargoTypeIsNotFoundByIdException e) {
             messageDto.setMessage(e.getMessage());
-            messageDto.setColor("darkred");
+            messageDto.setColor(alertTextColorError);
         }
         redirectAttributes.addFlashAttribute("message", messageDto);
 
@@ -85,18 +93,37 @@ public class OrderController {
 
     @PostMapping(value = "order/to-flight")
     public String orderToFlight(@RequestParam("orderId") int orderId, Model model, RedirectAttributes redirectAttributes) {
-        System.out.println("Order to flight: " + orderId);
-
         MessageDto messageDto = new MessageDto();
         try {
-            departureFlightService.departureFlight(orderId);
+            departureFlightService.departureFlight(orderId);  // отправляем в рейс
             messageDto.setMessage("The order has successfully set off on flight");
-            messageDto.setColor("darkgreen");
+            messageDto.setColor(alertTextColorSuccess);
         } catch (OrderIsNotFoundByIdException | CarIsNotFoundException | DriverIsNotFoundException | NullPointerException e) {
             messageDto.setMessage(e.getMessage());
-            messageDto.setColor("darkred");
+            messageDto.setColor(alertTextColorError);
         }
         redirectAttributes.addFlashAttribute("message", messageDto);
+
+        return "redirect:/orders/get";
+    }
+
+    @PostMapping(value = "order/delete")
+    public String deleteOrder(@RequestParam("orderId") int orderId, Model model, RedirectAttributes redirectAttributes) {
+        MessageDto messageDto = new MessageDto();
+
+        Order order = orderService.findById(orderId).orElse(null);
+        if (order == null) {
+            messageDto.setMessage("Order cannot find");
+            messageDto.setColor(alertTextColorError);
+        }
+        else {
+            orderService.delete(order);  // удаляем заявку
+
+            messageDto.setMessage("Order deleted successfully");
+            messageDto.setColor(alertTextColorSuccess);
+
+            redirectAttributes.addFlashAttribute("message", messageDto);
+        }
 
         return "redirect:/orders/get";
     }

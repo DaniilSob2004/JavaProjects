@@ -40,10 +40,16 @@
                         <td class="align-middle" th:utext="${flightDto.carName}">...</td>
                         <td class="align-middle" th:utext="${flightDto.countDayWay}">...</td>
                         <td>
-                            <form th:action="@{/flight/passed-day-way}" method="POST">
-                                <input type="hidden" name="flightId" th:value="${flightDto.flightId}"/>
-                                <button type="submit" class="btn btn-success">Passed one day</button>
-                            </form>
+                            <div class="d-flex">
+                                <form th:action="@{/flight/passed-day-way}" method="POST">
+                                    <input type="hidden" name="flightId" th:value="${flightDto.flightId}"/>
+                                    <button type="submit" class="btn btn-success">Passed one day</button>
+                                </form>
+                                <form class="ms-1" th:action="@{/flight/car-broke-down}" method="POST">
+                                    <input type="hidden" name="flightId" th:value="${flightDto.flightId}" />
+                                    <button type="submit" class="btn btn-danger">Car broke down</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

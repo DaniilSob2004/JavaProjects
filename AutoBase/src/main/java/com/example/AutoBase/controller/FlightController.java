@@ -4,6 +4,7 @@ import com.example.AutoBase.dto.FlightDto;
 import com.example.AutoBase.dto.MessageDto;
 import com.example.AutoBase.exceptions.FlightCannotBeCanceledException;
 import com.example.AutoBase.exceptions.FlightIsNotFoundByException;
+import com.example.AutoBase.service.CarBrokeDownService;
 import com.example.AutoBase.service.PassedOneDayFlightService;
 import com.example.AutoBase.service.busines.flightservice.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,21 @@ public class FlightController {
     @Value("${value.title}")
     private String pageTitle;
 
+    @Value("${value.alertTextColorError}")
+    private String alertTextColorError;
+
+    @Value("${value.alertTextColorSuccess}")
+    private String alertTextColorSuccess;
+
+
     @Autowired
     private FlightService flightService;
 
     @Autowired
     private PassedOneDayFlightService passedOneDayFlightService;
+
+    @Autowired
+    private CarBrokeDownService carBrokeDownService;
 
 
     @GetMapping(value = "flights/get")
@@ -52,10 +63,26 @@ public class FlightController {
                     ? "Completed flights"
                     : "Successfully passed day way";
             messageDto.setMessage(message);
-            messageDto.setColor("darkgreen");
+            messageDto.setColor(alertTextColorSuccess);
         } catch (FlightIsNotFoundByException | FlightCannotBeCanceledException | NullPointerException e) {
             messageDto.setMessage(e.getMessage());
-            messageDto.setColor("darkred");
+            messageDto.setColor(alertTextColorError);
+        }
+        redirectAttributes.addFlashAttribute("message", messageDto);
+
+        return "redirect:/flights/get";
+    }
+
+    @PostMapping(value = "flight/car-broke-down")
+    public String carBrokeDown(@RequestParam("flightId") int flightId, Model model, RedirectAttributes redirectAttributes) {
+        MessageDto messageDto = new MessageDto();
+        try {
+            carBrokeDownService.carBrokerDown(flightId);
+            messageDto.setMessage("Flight processing with a broken car was successful");
+            messageDto.setColor(alertTextColorSuccess);
+        } catch (FlightIsNotFoundByException | NullPointerException e) {
+            messageDto.setMessage(e.getMessage());
+            messageDto.setColor(alertTextColorError);
         }
         redirectAttributes.addFlashAttribute("message", messageDto);
 

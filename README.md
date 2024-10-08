@@ -1,7 +1,7 @@
 HW AutoBase:
   - ![2](https://github.com/user-attachments/assets/003bac46-c934-49dc-97fd-142c04724157)
-  - ![3](https://github.com/user-attachments/assets/2fa6e617-2aac-453f-a42a-1f6b452f48e9)
-  - ![4](https://github.com/user-attachments/assets/c5154bae-09c0-4ccd-a82d-21a334a997e2)
+  - ![3](https://github.com/user-attachments/assets/c1c51017-3e85-46bd-a149-f2180d08662f)
+  - ![4](https://github.com/user-attachments/assets/fe0a8960-6d9d-41b8-a68f-5b941520f1e0)
 
 ////////////////////////////////////////////////
 
