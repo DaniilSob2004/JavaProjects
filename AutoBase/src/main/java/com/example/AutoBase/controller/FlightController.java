@@ -48,8 +48,10 @@ public class FlightController {
 
         MessageDto messageDto = new MessageDto();
         try {
-            passedOneDayFlightService.passedOneDayFlight(flightId);
-            messageDto.setMessage("Successfully passed day way");
+            String message = (passedOneDayFlightService.passedOneDayFlight(flightId))
+                    ? "Completed flights"
+                    : "Successfully passed day way";
+            messageDto.setMessage(message);
             messageDto.setColor("darkgreen");
         } catch (FlightIsNotFoundByException | FlightCannotBeCanceledException | NullPointerException e) {
             messageDto.setMessage(e.getMessage());
