@@ -49,6 +49,7 @@ public class OrderController {
                 ? orderService.findAllDto()
                 : orderService.findByFilter(orderFilterDto);
 
+        model.addAttribute("title", pageTitle);
         model.addAttribute("ordersDto", ordersDto);
         model.addAttribute("orderFilterDto", orderFilterDto);
         return "orders";

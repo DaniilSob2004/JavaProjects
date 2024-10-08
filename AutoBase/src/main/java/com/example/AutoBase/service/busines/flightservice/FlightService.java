@@ -1,7 +1,9 @@
 package com.example.AutoBase.service.busines.flightservice;
 
+import com.example.AutoBase.dto.FlightDto;
 import com.example.AutoBase.model.Flight;
 import java.util.List;
+import java.util.Optional;
 
 public interface FlightService {
     void save(Flight flight);
@@ -11,6 +13,8 @@ public interface FlightService {
     List<Flight> findAll();
     void deleteAll();
 
-    void passedOneDayWay(Flight flight);
+    Optional<Flight> findById(int id);
+    List<FlightDto> findAllDto();
+    int passedOneDayWay(Flight flight);
     boolean flightBeenCompletedNow(Flight flight);
 }

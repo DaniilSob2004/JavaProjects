@@ -6,7 +6,6 @@ import com.example.AutoBase.dto.OrderDto;
 import com.example.AutoBase.dto.OrderFilterDto;
 import com.example.AutoBase.model.CargoType;
 import com.example.AutoBase.model.Order;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,16 +76,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findAllDto() {
-        return getOrderDto(orderRepository.findAll());
+        return getOrdersDto(orderRepository.findAll());
     }
 
     @Override
     public List<OrderDto> findByFilter(OrderFilterDto filterDto) {
-        return getOrderDto(orderRepository.findByFilter(filterDto));
+        return getOrdersDto(orderRepository.findByFilter(filterDto));
     }
 
 
-    private List<OrderDto> getOrderDto(List<Order> orders) {
+    private List<OrderDto> getOrdersDto(List<Order> orders) {
         return orders.stream()
                 .map(convertToTDO::convertToOrderDTO)
                 .collect(Collectors.toList());

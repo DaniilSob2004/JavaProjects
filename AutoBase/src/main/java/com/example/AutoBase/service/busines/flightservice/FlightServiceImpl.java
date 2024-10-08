@@ -1,17 +1,23 @@
 package com.example.AutoBase.service.busines.flightservice;
 
+import com.example.AutoBase.convert.ConvertToTDO;
 import com.example.AutoBase.dao.flight.FlightRepository;
+import com.example.AutoBase.dto.FlightDto;
 import com.example.AutoBase.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightRepository flightRepository;
+    @Autowired
+    private ConvertToTDO convertToTDO;
 
 
     @Override
@@ -47,16 +53,35 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    public void passedOneDayWay(Flight flight) {
+    public Optional<Flight> findById(int id) {
+        return flightRepository.findById(id);
+    }
+
+    @Override
+    public List<FlightDto> findAllDto() {
+        return getFlightsDto(flightRepository.findAll());
+    }
+
+    @Override
+    public int passedOneDayWay(Flight flight) {
         int curDay = flight.getCountDayWay();
         if (curDay > 0) {
             flight.setCountDayWay(curDay - 1);
             flightRepository.save(flight);
+            return curDay - 1;
         }
+        return 0;
     }
 
     @Override
     public boolean flightBeenCompletedNow(Flight flight) {
         return flight.getCountDayWay() <= 0;
+    }
+
+
+    private List<FlightDto> getFlightsDto(List<Flight> flights) {
+        return flights.stream()
+                .map(convertToTDO::convertToFlightDTO)
+                .collect(Collectors.toList());
     }
 }
