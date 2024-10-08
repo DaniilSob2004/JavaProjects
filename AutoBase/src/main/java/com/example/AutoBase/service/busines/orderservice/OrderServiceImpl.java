@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,6 +55,11 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.deleteAll();
     }
 
+
+    @Override
+    public Optional<Order> findById(int id) {
+        return orderRepository.findById(id);
+    }
 
     @Override
     public float getTotalPrice(Order order) {

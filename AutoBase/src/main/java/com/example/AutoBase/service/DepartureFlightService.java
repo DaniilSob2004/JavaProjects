@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class DepartureFlightService {
 
     @Value("${value.averageCarSpeed}")
@@ -32,11 +34,14 @@ public class DepartureFlightService {
     private DriverService driverService;
 
 
-    public void departureFlight(Order order) {
-        Order validOrder = Objects.requireNonNull(order, "Order cannot be null...");
+    public void departureFlight(int idOrder) {
+        // находим order по id
+        Order order = orderService.findById(idOrder)
+                .orElseThrow(() -> new OrderIsNotFoundByIdException("Order cannot find by id: (" + idOrder + ")"));
+        System.out.println("Находим order по id...");
 
-        CargoType cargoType = Objects.requireNonNull(validOrder.getCargoType(), "Cargo type cannot be null...");
-        City city = Objects.requireNonNull(validOrder.getCity(), "City cannot be null...");
+        CargoType cargoType = Objects.requireNonNull(order.getCargoType(), "Cargo type cannot be null...");
+        City city = Objects.requireNonNull(order.getCity(), "City cannot be null...");
 
         // находим свободную машину
         Car car = carService.findFreeCarByCarrying(order.getWeight())
@@ -57,6 +62,14 @@ public class DepartureFlightService {
         Flight flight = new Flight(0, order, car, driver, countDayWay, LocalDateTime.now());
         flightService.save(flight);
         System.out.println("Создаём Flight...");
+
+        // устанавливаем флаг в driver
+        driver.setFree(false);
+        driverService.update(driver);
+
+        // устанавливаем флаг в car
+        car.setFree(false);
+        carService.update(car);
 
         // устанавливаем флаг в order
         order.setFlight(true);

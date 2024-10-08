@@ -1,12 +1,9 @@
 package com.example.AutoBase.controller;
 
-import com.example.AutoBase.dto.MessageDto;
-import com.example.AutoBase.dto.OrderCreateDto;
-import com.example.AutoBase.dto.OrderDto;
-import com.example.AutoBase.dto.OrderFilterDto;
-import com.example.AutoBase.exceptions.CargoTypeIsNotFoundByIdException;
-import com.example.AutoBase.exceptions.CityIsNotFoundByIdException;
+import com.example.AutoBase.dto.*;
+import com.example.AutoBase.exceptions.*;
 import com.example.AutoBase.service.CreateOrderService;
+import com.example.AutoBase.service.DepartureFlightService;
 import com.example.AutoBase.service.busines.cargotypeservice.CargoTypeService;
 import com.example.AutoBase.service.busines.cityservice.CityService;
 import com.example.AutoBase.service.busines.orderservice.OrderService;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -39,18 +37,17 @@ public class OrderController {
     @Autowired
     private CreateOrderService createOrderService;
 
+    @Autowired
+    private DepartureFlightService departureFlightService;
+
 
     @GetMapping(value = "orders/get")
     public String getOrders(@ModelAttribute OrderFilterDto orderFilterDto, Model model) {
         System.out.println(orderFilterDto);
 
-        List<OrderDto> ordersDto;
-        if (orderFilterDto.getIsFlight() == null) {
-            ordersDto = orderService.findAllDto();
-        }
-        else {
-            ordersDto = orderService.findByFilter(orderFilterDto);
-        }
+        List<OrderDto> ordersDto = (orderFilterDto.getIsFlight() == null)
+                ? orderService.findAllDto()
+                : orderService.findByFilter(orderFilterDto);
 
         model.addAttribute("ordersDto", ordersDto);
         model.addAttribute("orderFilterDto", orderFilterDto);
@@ -67,7 +64,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "order/create")
-    public String createOrder(@RequestParam("orderCreateDto") OrderCreateDto orderCreateDto, Model model) {
+    public String createOrder(OrderCreateDto orderCreateDto, Model model, RedirectAttributes redirectAttributes) {
         System.out.println(orderCreateDto.toString());
 
         MessageDto messageDto = new MessageDto();
@@ -79,15 +76,27 @@ public class OrderController {
             messageDto.setMessage(e.getMessage());
             messageDto.setColor("darkred");
         }
-        model.addAttribute("message", messageDto);
+        redirectAttributes.addFlashAttribute("message", messageDto);
 
         return "redirect:/orders/get";
     }
 
 
     @PostMapping(value = "order/to-flight")
-    public String orderToFlight(@RequestParam("orderId") int orderId, Model model) {
-        System.out.println("TO FLIGHT, id: " + orderId);
-        return "main";
+    public String orderToFlight(@RequestParam("orderId") int orderId, Model model, RedirectAttributes redirectAttributes) {
+        System.out.println("Order to flight: " + orderId);
+
+        MessageDto messageDto = new MessageDto();
+        try {
+            departureFlightService.departureFlight(orderId);
+            messageDto.setMessage("The order has successfully set off on flight");
+            messageDto.setColor("darkgreen");
+        } catch (OrderIsNotFoundByIdException | CarIsNotFoundException | DriverIsNotFoundException | NullPointerException e) {
+            messageDto.setMessage(e.getMessage());
+            messageDto.setColor("darkred");
+        }
+        redirectAttributes.addFlashAttribute("message", messageDto);
+
+        return "redirect:/orders/get";
     }
 }

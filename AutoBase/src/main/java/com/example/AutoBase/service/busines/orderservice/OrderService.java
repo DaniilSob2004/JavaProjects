@@ -6,6 +6,7 @@ import com.example.AutoBase.model.Order;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
     void save(Order order);
@@ -15,6 +16,7 @@ public interface OrderService {
     List<Order> findAll();
     void deleteAll();
 
+    Optional<Order> findById(int id);
     float getTotalPrice(Order order);
     List<Order> findNewOrders();
     List<OrderDto> findAllDto();
