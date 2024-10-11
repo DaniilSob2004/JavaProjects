@@ -56,6 +56,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public Optional<Driver> findByName(String name) {
+        return driverRepository.findDriverByName(name);
+    }
+
+    @Override
     public void accrualOfMoney(Driver driver, float money) {
         if (money <= 0) {
             System.err.println("Money must be greater than zero...");

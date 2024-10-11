@@ -17,4 +17,5 @@ public interface DriverRepository extends JpaRepository<Driver, Integer> {
     List<Driver> findFreeDriversByExperience(@Param("experience") int experience);
 
     Optional<Driver> findById(int driverId);
+    Optional<Driver> findDriverByName(String name);
 }

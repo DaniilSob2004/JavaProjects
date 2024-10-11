@@ -55,8 +55,6 @@ public class FlightController {
 
     @PostMapping(value = "flight/passed-day-way")
     public String passedDayWay(@RequestParam("flightId") int flightId, Model model, RedirectAttributes redirectAttributes) {
-        System.out.println("Flight id: " + flightId);
-
         MessageDto messageDto = new MessageDto();
         try {
             String message = (passedOneDayFlightService.passedOneDayFlight(flightId))

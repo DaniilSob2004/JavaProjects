@@ -6,14 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class DriverController {
 
     @Value("${value.title}")
     private String pageTitle;
 
-    @GetMapping(value = {"/", "/main"})
-    public String homePage(Model model) {
+    @GetMapping(value = {"/userInfo"})
+    public String loginPage(Model model) {
         model.addAttribute("title", pageTitle);
-        return "main";
+        return "userInfo";
     }
 }

@@ -16,5 +16,6 @@ public interface DriverService {
     void deleteAll();
 
     Optional<Driver> findFreeDriverByExperience(int experience);
+    Optional<Driver> findByName(String name);
     void accrualOfMoney(Driver driver, float money);
 }

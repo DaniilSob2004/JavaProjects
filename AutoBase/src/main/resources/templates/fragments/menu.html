@@ -11,6 +11,16 @@
           <a class="nav-link" th:href="@{/order/create}">Create order</a>
           <a class="nav-link" th:href="@{/orders/get}">Orders</a>
           <a class="nav-link" th:href="@{/flights/get}">Flights</a>
+          <!-- th:if="${#request.isUserInRole('ROLE_USER')}" -->
+        </div>
+        <div class="navbar-nav ms-auto">
+          <a th:if="${#request.userPrincipal == null}" class="nav-link" th:href="@{/login}">Sign in</a>
+          <a th:if="${#request.userPrincipal == null}" class="nav-link" th:href="@{/registration}">Sign up</a>
+
+          <a th:if="${#request.userPrincipal != null}" class="nav-link" th:href="@{/userInfo}">
+            Hello, <span th:utext="${#request.userPrincipal.name}"></span>
+          </a>
+          <a th:if="${#request.userPrincipal != null}" class="nav-link" th:href="@{/logout}">Logout</a>
         </div>
       </div>
     </div>
