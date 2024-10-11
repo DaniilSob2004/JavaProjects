@@ -5,6 +5,14 @@ HW AutoBase:
 
 ////////////////////////////////////////////////
 
+HW Tickets:
+  - ![1](https://github.com/user-attachments/assets/91718cd6-acec-4911-a47b-8b02639999d7)
+  - ![2](https://github.com/user-attachments/assets/62bf99c2-6ae6-4e87-b2cc-a84d9e11e11b)
+  - ![3](https://github.com/user-attachments/assets/58370f7c-ad81-4b38-a277-c300702a1a29)
+  - ![4](https://github.com/user-attachments/assets/4b4b0e33-d3a5-4f6e-be91-3e9684d4d36b)
+
+////////////////////////////////////////////////
+
 HW LOG_REST:
   - ![1](https://github.com/user-attachments/assets/07d2eebe-0b8d-45cf-b852-b65a8b624476)
   - ![2](https://github.com/user-attachments/assets/e6e02ad7-aad7-4ffb-bedf-5237e828ba0c)

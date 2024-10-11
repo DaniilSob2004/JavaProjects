@@ -11,4 +11,5 @@ import java.util.Optional;
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     Optional<Customer> findById(Integer id);
+    Optional<Customer> findCustomerByName(String name);
 }

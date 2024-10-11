@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title th:utext="${title}"></title>
+    </head>
+    <body>
+        <th:block th:include="/fragments/menu"></th:block>
+
+        <div th:if="${eventsDto == null || eventsDto.isEmpty()}">
+            <h3>Events empty...</h3>
+        </div>
+
+        <table th:if="${eventsDto != null && !eventsDto.isEmpty()}" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Place</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "eventDto : ${eventsDto}">
+                    <th scope="row" th:utext="${eventDto.id}">...</th>
+                    <td th:utext="${eventDto.name}">...</td>
+                    <td th:utext="${eventDto.eventDate}">...</td>
+                    <td th:utext="${eventDto.placeName}">...</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -13,16 +13,6 @@
 
             <form name='getTicket' th:action="@{/customer/getTicket}" method='POST'>
                 <div class="mb-3">
-                    <label for="customer" class="form-label">Select Customer</label>
-                    <select id="customer" name="customerId" class="form-select">
-                        <option value="">-- Select a Customer --</option>
-                        <option th:each="customer : ${customers}"
-                                th:value="${customer.id}"
-                                th:text="${customer.name}">Customer Name</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
                     <label for="event" class="form-label">Select Event</label>
                     <select id="event" name="eventId" class="form-select">
                         <option value="">-- Select an Event --</option>

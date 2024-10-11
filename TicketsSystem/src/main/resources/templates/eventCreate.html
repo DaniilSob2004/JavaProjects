@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Logout</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script>
+            function addTicketPack() {
+                const ticketPacksDiv = document.getElementById('ticketPacks');
+                const ticketPackCount = document.querySelectorAll('#ticketPacks div.ticket-pack').length;
+
+                const newTicketPack = document.createElement('div');
+                newTicketPack.className = 'ticket-pack row g-3 align-items-center mt-1';
+                newTicketPack.innerHTML = `
+                    <div class="col-auto">
+                        <label class="col-form-label">Price:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" step="0.01" name="ticketPacksDto[${ticketPackCount}].price" class="form-control" required>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="col-form-label">Quantity:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" name="ticketPacksDto[${ticketPackCount}].quantity" class="form-control" required>
+                    </div>
+                `;
+
+                ticketPacksDiv.appendChild(newTicketPack);
+            }
+        </script>
+    </head>
+    <body>
+        <th:block th:include="/fragments/menu"></th:block>
+
+        <div class="d-flex justify-content-center m-2">
+            <div class="card p-4" style="width: 50%;">
+                <h3 class="text-center">Create event</h3>
+                <form name='createEvent' th:action="@{/event/create}" th:method="POST" th:object="${eventCreationDTO}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Event Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDate" class="form-label">Event Date</label>
+                        <input type="date" class="form-control" id="eventDate" th:field="*{eventDate}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Place Address</label>
+                        <input type="text" class="form-control" id="address" th:field="*{placeDto.address}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placeName" class="form-label">Place Name</label>
+                        <input type="text" class="form-control" id="placeName" th:field="*{placeDto.name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tickets</label>
+                        <div id="ticketPacks"></div>
+                        <!-- кнопка для добавления еще одного ticket pack -->
+                        <button class="btn btn-success mt-2" type="button" onclick="addTicketPack()">Add Ticket Pack</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

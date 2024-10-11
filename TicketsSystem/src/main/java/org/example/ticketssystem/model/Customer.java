@@ -26,6 +26,9 @@ public class Customer {
     @Column(name = "phone", nullable = false)
     private String phone;
 
+    @Column(name = "encrypted_password")
+    private String encryptedPassword;
+
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 }

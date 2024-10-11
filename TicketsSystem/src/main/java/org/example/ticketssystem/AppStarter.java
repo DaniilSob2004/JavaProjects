@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Log4j2
 @Configuration
@@ -20,9 +22,9 @@ public class AppStarter {
         return args -> {
             System.out.println("-".repeat(20));
 
-            startMenu.start();
+            //startMenu.start();
 
-            System.out.println("-".repeat(20));
+            //System.out.println("-".repeat(20));
         };
     }
 }
