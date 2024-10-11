@@ -105,12 +105,6 @@ public class CustomerController {
             return "getTicketShow";  // html нет ticket
         }
 
-        // присваиваем Ticket нашему Customer
-        //Customer customer = customerService.findById(customerIdInt).orElse(null);
-        /*if (customer == null) {
-            return "getTicketShow";  // html нет customer
-        }*/
-
         // присваиваем и сохраняем
         ticketFree.setCustomer(customer);
         ticketService.update(ticketFree);

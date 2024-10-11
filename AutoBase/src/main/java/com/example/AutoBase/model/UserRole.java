@@ -1,4 +1,4 @@
-package org.example.ticketssystem.model;
+package com.example.AutoBase.model;
 
 import lombok.*;
 import javax.persistence.*;
@@ -7,18 +7,18 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "customer_role")
-public class CustomerRole {
+@Table(name = "user_role")
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name="user_id", nullable = false)
+    private Driver driver;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="role_role_id", nullable = false)
+    @JoinColumn(name="role_id", nullable = false)
     private Role role;
 }

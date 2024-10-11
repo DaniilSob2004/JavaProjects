@@ -31,4 +31,7 @@ public class Driver {
 
     @Column(name = "is_free", nullable = false)
     private boolean isFree = true;
+
+    @Column(name = "encrypted_password")
+    private String encryptedPassword;
 }

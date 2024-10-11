@@ -113,7 +113,7 @@ public class AutoBaseDbInitializer {
         for (int i = 0; i < countDrivers; i++) {
             String numTel = TestUtils.getRandomNumTel();
             int experience = TestUtils.getRandomInteger(0, 10);  // от 0 до 10 лет
-            drivers.add(new Driver(0, names.get(i), lastnames.get(i), numTel, experience, 0, true));
+            drivers.add(new Driver(0, names.get(i), lastnames.get(i), numTel, experience, 0, true, "password"));
         }
         driverService.saveDriversList(drivers);
 
