@@ -20,6 +20,7 @@ public enum Endpoints {
     USER_INFO("/userInfo"),
     LOGOUT("/logout"),
     FLIGHT_CAR_BROKE_DOWN("/flight/car-broke-down"),
+    FLIGHT_GET("/flight/get"),
 
     // admin
     FLIGHTS_GET("/flights/get"),
@@ -30,6 +31,7 @@ public enum Endpoints {
     ORDER_TO_FLIGHT("/order/to-flight"),
     ORDER_DELETE("/order/delete"),
     CARS_GET("/cars/get"),
+    CAR_FROM_BROKER("/car/from-broker"),
     ;
 
     private final String endPoint;
@@ -54,6 +56,7 @@ public enum Endpoints {
         endpoints.add(ORDER_TO_FLIGHT);
         endpoints.add(ORDER_DELETE);
         endpoints.add(CARS_GET);
+        endpoints.add(CAR_FROM_BROKER);
         return endpoints;
     }
 
@@ -62,6 +65,7 @@ public enum Endpoints {
         endpoints.add(LOGOUT);
         endpoints.add(USER_INFO);
         endpoints.add(FLIGHT_CAR_BROKE_DOWN);
+        endpoints.add(FLIGHT_GET);
         return endpoints;
     }
 }

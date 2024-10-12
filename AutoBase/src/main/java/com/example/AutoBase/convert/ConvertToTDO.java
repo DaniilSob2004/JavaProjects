@@ -1,9 +1,13 @@
 package com.example.AutoBase.convert;
 
+import com.example.AutoBase.dto.CarDto;
 import com.example.AutoBase.dto.FlightDto;
 import com.example.AutoBase.dto.OrderDto;
 import com.example.AutoBase.model.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ConvertToTDO {
@@ -37,5 +41,27 @@ public class ConvertToTDO {
                 car.getName(),
                 flight.getCountDayWay()
         );
+    }
+
+    public CarDto convertToCarDTO(Car car) {
+        return new CarDto(
+                car.getId(),
+                car.getName(),
+                car.getCarrying(),
+                car.isFree(),
+                car.isBroker()
+        );
+    }
+
+    public List<OrderDto> convertToOrdersDTO(List<Order> orders) {
+        return orders.stream()
+                .map(this::convertToOrderDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<CarDto> convertToCarsDTO(List<Car> cars) {
+        return cars.stream()
+                .map(this::convertToCarDTO)
+                .collect(Collectors.toList());
     }
 }

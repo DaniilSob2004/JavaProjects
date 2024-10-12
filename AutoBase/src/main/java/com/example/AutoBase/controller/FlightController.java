@@ -7,6 +7,7 @@ import com.example.AutoBase.exceptions.FlightIsNotFoundByException;
 import com.example.AutoBase.service.CarBrokeDownService;
 import com.example.AutoBase.service.PassedOneDayFlightService;
 import com.example.AutoBase.service.busines.flightservice.FlightService;
+import com.example.AutoBase.service.securityservice.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class FlightController {
 
     @Autowired
     private CarBrokeDownService carBrokeDownService;
+
+    @Autowired
+    private SecurityService securityService;
 
 
     @GetMapping(value = "flights/get")
@@ -85,5 +89,32 @@ public class FlightController {
         redirectAttributes.addFlashAttribute("message", messageDto);
 
         return "redirect:/flights/get";
+    }
+
+    @GetMapping(value = "flight/get")
+    public String getFlight(Model model) {
+        MessageDto messageDto = null;
+
+        // найти у нашего пользователя flight
+        int driverId = securityService.getCurrentUserId();
+
+        if (driverId == -1) {
+            messageDto = new MessageDto();
+            messageDto.setMessage("Driver not found");
+            messageDto.setColor(alertTextColorError);
+        }
+
+        // находим flight нашего пользователя
+        FlightDto flightFto = flightService.findByDriverId(driverId).orElse(null);
+        if (flightFto == null) {
+            messageDto = new MessageDto();
+            messageDto.setMessage("Driver has not flight");
+            messageDto.setColor(alertTextColorError);
+        }
+
+        model.addAttribute("flightDto", flightFto);
+        model.addAttribute("message", messageDto);
+
+        return "flightInfo";
     }
 }

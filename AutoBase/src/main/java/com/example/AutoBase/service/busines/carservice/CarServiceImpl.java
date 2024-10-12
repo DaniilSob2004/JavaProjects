@@ -1,6 +1,9 @@
 package com.example.AutoBase.service.busines.carservice;
 
+import com.example.AutoBase.convert.ConvertToTDO;
 import com.example.AutoBase.dao.car.CarRepository;
+import com.example.AutoBase.dto.CarDto;
+import com.example.AutoBase.dto.CarFilterDto;
 import com.example.AutoBase.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,9 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private ConvertToTDO convertToTDO;
 
 
     @Override
@@ -49,9 +55,24 @@ public class CarServiceImpl implements CarService {
 
 
     @Override
+    public Optional<Car> findById(int id) {
+        return carRepository.findById(id);
+    }
+
+    @Override
     public Optional<Car> findFreeCarByCarrying(float carrying) {
         return carRepository.findFreeCarsByCarrying(carrying)
                 .stream()
                 .min(Comparator.comparing(Car::getCarrying));
+    }
+
+    @Override
+    public List<CarDto> findAllDto() {
+        return convertToTDO.convertToCarsDTO(carRepository.findAll());
+    }
+
+    @Override
+    public List<CarDto> findByFilter(CarFilterDto filterDto) {
+        return convertToTDO.convertToCarsDTO(carRepository.findByFilter(filterDto));
     }
 }

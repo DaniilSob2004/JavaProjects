@@ -14,6 +14,7 @@ public interface FlightService {
     void deleteAll();
 
     Optional<Flight> findById(int id);
+    Optional<FlightDto> findByDriverId(int driverId);
     List<FlightDto> findAllDto();
     int passedOneDayWay(Flight flight);
     boolean flightBeenCompletedNow(Flight flight);

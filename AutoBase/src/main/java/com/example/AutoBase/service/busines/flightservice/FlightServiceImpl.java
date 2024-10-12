@@ -16,6 +16,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightRepository flightRepository;
+
     @Autowired
     private ConvertToTDO convertToTDO;
 
@@ -55,6 +56,12 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public Optional<Flight> findById(int id) {
         return flightRepository.findById(id);
+    }
+
+    @Override
+    public Optional<FlightDto> findByDriverId(int driverId) {
+        Optional<Flight> flight = flightRepository.findFlightByDriverId(driverId);
+        return flight.map(f -> convertToTDO.convertToFlightDTO(f));
     }
 
     @Override

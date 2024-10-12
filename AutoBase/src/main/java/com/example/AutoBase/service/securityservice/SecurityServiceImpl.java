@@ -35,7 +35,10 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public String findLoggedInUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName();
+        }
+        return "";
     }
 
     @Override
@@ -70,5 +73,13 @@ public class SecurityServiceImpl implements SecurityService {
         );
 
         return Optional.of(userInfoDto);
+    }
+
+    @Override
+    public int getCurrentUserId() {
+        String username = findLoggedInUsername();
+        return driverService.findByName(username)
+                .map(Driver::getId)
+                .orElse(-1);
     }
 }

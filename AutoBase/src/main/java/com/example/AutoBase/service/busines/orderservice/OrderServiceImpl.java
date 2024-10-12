@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -76,18 +75,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findAllDto() {
-        return getOrdersDto(orderRepository.findAll());
+        return convertToTDO.convertToOrdersDTO(orderRepository.findAll());
     }
 
     @Override
     public List<OrderDto> findByFilter(OrderFilterDto filterDto) {
-        return getOrdersDto(orderRepository.findByFilter(filterDto));
-    }
-
-
-    private List<OrderDto> getOrdersDto(List<Order> orders) {
-        return orders.stream()
-                .map(convertToTDO::convertToOrderDTO)
-                .collect(Collectors.toList());
+        return convertToTDO.convertToOrdersDTO(orderRepository.findByFilter(filterDto));
     }
 }

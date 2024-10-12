@@ -22,7 +22,7 @@ public class AuthController {
 
     @Value("${value.title}")
     private String pageTitle;
-    
+
     @Value("${value.alertTextColorSuccess}")
     private String alertTextColorSuccess;
 

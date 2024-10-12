@@ -53,6 +53,7 @@ public class CarBrokeDownService {
         int timeToRepair = TestUtils.getRandomInteger(1, 3);
         car.setTimeToRepair(timeToRepair);
         car.setBroker(true);
+        car.setFree(false);
         carService.update(car);
         System.out.println("Машину в ремонт...");
 
