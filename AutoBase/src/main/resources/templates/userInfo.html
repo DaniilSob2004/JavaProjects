@@ -7,12 +7,45 @@
     <body>
         <th:block th:include="/fragments/menu"></th:block>
 
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="inputPassword6" class="col-form-label">Password</label>
-            </div>
-            <div class="col-auto">
-                <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-body" th:object="${userInfoDto}">
+                    <h5 class="card-title">User Info</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="name" class="col-form-label">Name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="name" class="form-control" th:value="*{name}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="numTel" class="col-form-label">Phone Number</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="numTel" class="form-control" th:value="*{numTel}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="totalSum" class="col-form-label">Total Sum</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="totalSum" class="form-control" th:value="*{totalSum}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label class="col-form-label">Roles</label>
+                        </div>
+                        <div class="col-md-9">
+                            <ul class="list-group">
+                                <li class="list-group-item" th:each="role : *{roles}" th:text="${role}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

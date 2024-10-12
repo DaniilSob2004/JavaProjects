@@ -1,6 +1,7 @@
 package com.example.AutoBase.dto;
 
 import lombok.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -8,5 +9,6 @@ import lombok.*;
 public class UserInfoDto {
     private String name;
     private String numTel;
-    private String role;
+    private float totalSum;
+    private List<String> roles;
 }

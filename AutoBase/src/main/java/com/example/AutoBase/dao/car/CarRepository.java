@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface CarRepository extends JpaRepository<Car, Integer> {
-    @Query("SELECT c FROM Car c WHERE c.carrying >= :carrying AND c.isFree = true")
+    @Query("SELECT c FROM Car c WHERE c.carrying >= :carrying AND c.isBroker = false AND c.isFree = true")
     List<Car> findFreeCarsByCarrying(@Param("carrying") float carrying);
 
     Optional<Car> findCarById(int id);
