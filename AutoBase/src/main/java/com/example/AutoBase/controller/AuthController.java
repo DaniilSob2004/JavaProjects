@@ -1,18 +1,16 @@
 package com.example.AutoBase.controller;
 
 import com.example.AutoBase.dto.MessageDto;
-import com.example.AutoBase.service.busines.driverservice.DriverService;
-import com.example.AutoBase.service.busines.roleservice.RoleService;
-import com.example.AutoBase.service.busines.userroleservice.UserRoleService;
-import com.example.AutoBase.service.securityservice.SecurityService;
+import com.example.AutoBase.model.Driver;
+import com.example.AutoBase.service.registrationuserservice.RegistrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
@@ -31,19 +29,7 @@ public class AuthController {
     private String alertTextColorSuccess;
 
     @Autowired
-    private DriverService driverService;
-
-    @Autowired
-    private UserRoleService userRoleService;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private RegistrationUserService registrationUserService;
 
 
     @GetMapping(value = {"/login"})
@@ -51,38 +37,40 @@ public class AuthController {
         return "auth/login";
     }
 
-    /*@GetMapping(value = "/registration")
+    @GetMapping(value = "/registration")
     public String registrationPage(Model model) {
-        return "registration";
+        model.addAttribute("userForm", new Driver());
+        return "auth/registration";
     }
 
     @PostMapping(value = "/registration")
-    public String registration(@RequestParam("name") String name,
-                               @RequestParam("password") String password,
-                               @RequestParam("email") String email,
-                               @RequestParam("phone") String phone,
-                               Model model) {
-        // шифруем пароль и добалвяем пользователя
-        String encPassword = passwordEncoder.encode(password);
-        Customer addCustomer = new Customer(0, name, email, phone, encPassword, null);
-        Customer customer = customerService.save(addCustomer);
+    public String registration(@ModelAttribute Driver driver, BindingResult bindingResult, Model model) {
+        System.out.println(driver);
 
-        // добавляем роль
-        Role userRole = roleService.findRoleByName("ROLE_USER").orElse(null);
-        if (userRole == null) {
-            throw new RuntimeException("Role not found...");
+        MessageDto messageDto = new MessageDto();
+        messageDto.setColor(alertTextColorError);
+
+        if (bindingResult.hasErrors()) {
+            messageDto.setMessage("Binding results error");
+            model.addAttribute("message", messageDto);
+            model.addAttribute("userForm", driver);
+            return "auth/registration";
+        }
+        if (!driver.getEncryptedPassword().equals(driver.getPasswordConfirm())) {
+            messageDto.setMessage("Passwords don't match");
+            model.addAttribute("message", messageDto);
+            model.addAttribute("userForm", driver);
+            return "auth/registration";
+        }
+        if (!registrationUserService.registerUser(driver)) {
+            messageDto.setMessage("A user with the same name already exists");
+            model.addAttribute("message", messageDto);
+            model.addAttribute("userForm", driver);
+            return "auth/registration";
         }
 
-        // связка роли и пользователя
-        CustomerRole customerRole = new CustomerRole(0, customer, userRole);
-        customerRoleService.save(customerRole);
-
-        // авторизация пользователя после регистрации
-        securityService.autoLogin(name, password);
-
-        return "redirect:/customerInfo";
+        return "redirect:/userInfo";
     }
-*/
 
     @GetMapping(value = "/logoutSuccessful")
     public String logout(Model model, RedirectAttributes redirectAttributes) {

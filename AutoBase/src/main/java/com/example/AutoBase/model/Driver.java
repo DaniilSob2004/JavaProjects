@@ -34,4 +34,7 @@ public class Driver {
 
     @Column(name = "encrypted_password")
     private String encryptedPassword;
+
+    @Transient
+    private String passwordConfirm;
 }

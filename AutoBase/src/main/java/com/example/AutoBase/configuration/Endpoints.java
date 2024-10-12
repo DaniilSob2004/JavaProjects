@@ -14,10 +14,10 @@ public enum Endpoints {
     MAIN_2("/main"),
     LOGIN("/login"),
     REGISTRATION("/registration"),
+    LOGOUT("/logout"),
     LOGOUT_SUCCESSFUL("/logoutSuccessful"),
 
     // auth users (driver)
-    LOGOUT("/logout"),
     USER_INFO("/userInfo"),
     FLIGHT_CAR_BROKE_DOWN("/flight/car-broke-down"),
 
@@ -39,6 +39,7 @@ public enum Endpoints {
         endpoints.add(MAIN_2);
         endpoints.add(LOGIN);
         endpoints.add(REGISTRATION);
+        endpoints.add(LOGOUT);
         endpoints.add(LOGOUT_SUCCESSFUL);
         return endpoints;
     }
@@ -57,7 +58,6 @@ public enum Endpoints {
 
     static public List<Endpoints> getEndpointForAdminAndAuthUser() {
         List<Endpoints> endpoints = new ArrayList<>();
-        endpoints.add(LOGOUT);
         endpoints.add(USER_INFO);
         endpoints.add(FLIGHT_CAR_BROKE_DOWN);
         return endpoints;
