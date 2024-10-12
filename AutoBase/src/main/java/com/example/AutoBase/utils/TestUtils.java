@@ -1,10 +1,13 @@
 package com.example.AutoBase.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Year;
 import java.util.Random;
 
+@UtilityClass
 public class TestUtils {
     private static final Random RAND = new Random();
     private static final int MIN_INT = 1;

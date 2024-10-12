@@ -17,5 +17,6 @@ public interface DriverService {
 
     Optional<Driver> findFreeDriverByExperience(int experience);
     Optional<Driver> findByName(String name);
+    Optional<Driver> findByNumTel(String numTel);
     void accrualOfMoney(Driver driver, float money);
 }

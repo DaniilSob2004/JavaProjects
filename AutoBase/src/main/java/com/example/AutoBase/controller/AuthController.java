@@ -3,6 +3,7 @@ package com.example.AutoBase.controller;
 import com.example.AutoBase.dto.MessageDto;
 import com.example.AutoBase.model.Driver;
 import com.example.AutoBase.service.registrationuserservice.RegistrationUserService;
+import com.example.AutoBase.utils.HandleError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,7 @@ public class AuthController {
 
     @Value("${value.title}")
     private String pageTitle;
-
-    @Value("${value.alertTextColorError}")
-    private String alertTextColorError;
-
+    
     @Value("${value.alertTextColorSuccess}")
     private String alertTextColorSuccess;
 
@@ -45,28 +43,16 @@ public class AuthController {
 
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute Driver driver, BindingResult bindingResult, Model model) {
-        System.out.println(driver);
-
-        MessageDto messageDto = new MessageDto();
-        messageDto.setColor(alertTextColorError);
-
         if (bindingResult.hasErrors()) {
-            messageDto.setMessage("Binding results error");
-            model.addAttribute("message", messageDto);
-            model.addAttribute("userForm", driver);
-            return "auth/registration";
+            return HandleError.handleRegistrationError(model, driver, "Binding results error");
         }
         if (!driver.getEncryptedPassword().equals(driver.getPasswordConfirm())) {
-            messageDto.setMessage("Passwords don't match");
-            model.addAttribute("message", messageDto);
-            model.addAttribute("userForm", driver);
-            return "auth/registration";
+            return HandleError.handleRegistrationError(model, driver, "Passwords don't match");
         }
-        if (!registrationUserService.registerUser(driver)) {
-            messageDto.setMessage("A user with the same name already exists");
-            model.addAttribute("message", messageDto);
-            model.addAttribute("userForm", driver);
-            return "auth/registration";
+
+        String regMess = registrationUserService.registerUser(driver).orElse(null);
+        if (regMess != null) {
+            return HandleError.handleRegistrationError(model, driver, regMess);
         }
 
         return "redirect:/userInfo";

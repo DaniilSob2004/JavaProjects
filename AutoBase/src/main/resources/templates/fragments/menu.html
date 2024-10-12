@@ -8,10 +8,12 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-          <a class="nav-link" th:href="@{/order/create}">Create order</a>
-          <a class="nav-link" th:href="@{/orders/get}">Orders</a>
-          <a class="nav-link" th:href="@{/flights/get}">Flights</a>
-          <!-- th:if="${#request.isUserInRole('ROLE_USER')}" -->
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="nav-link" th:href="@{/order/create}">Create order</a>
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="nav-link" th:href="@{/orders/get}">Orders</a>
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="nav-link" th:href="@{/flights/get}">Flights</a>
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="nav-link" th:href="@{/cars/get}">Cars</a>
+
+          <a th:if="${#request.isUserInRole('ROLE_USER')}" class="nav-link" th:href="@{/flight/get}">My flight</a>
         </div>
         <div class="navbar-nav ms-auto">
           <a th:if="${#request.userPrincipal == null}" class="nav-link" th:href="@{/login}">Sign in</a>

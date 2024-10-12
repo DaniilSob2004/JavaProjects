@@ -2,6 +2,8 @@ package com.example.AutoBase.service.registrationuserservice;
 
 import com.example.AutoBase.model.Driver;
 
+import java.util.Optional;
+
 public interface RegistrationUserService {
-    boolean registerUser(Driver driver);
+    Optional<String> registerUser(Driver driver);
 }

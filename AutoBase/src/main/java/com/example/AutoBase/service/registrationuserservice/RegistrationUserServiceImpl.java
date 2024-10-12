@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RegistrationUserServiceImpl implements RegistrationUserService {
 
@@ -31,11 +33,17 @@ public class RegistrationUserServiceImpl implements RegistrationUserService {
 
 
     @Override
-    public boolean registerUser(Driver driver) {
+    public Optional<String> registerUser(Driver driver) {
         // если с таким именем пользователь есть
         Driver findDriver = driverService.findByName(driver.getName()).orElse(null);
         if (findDriver != null) {
-            return false;
+            return Optional.of("A user with the same name already exists");
+        }
+
+        // если с таким номером телефона есть
+        findDriver = driverService.findByNumTel(driver.getNumTel()).orElse(null);
+        if (findDriver != null) {
+            return Optional.of("A user with the same num tel already exists");
         }
 
         // шифруем пароль и добавляем пользователя
@@ -57,6 +65,6 @@ public class RegistrationUserServiceImpl implements RegistrationUserService {
         // авторизация пользователя после регистрации
         securityService.autoLogin(addDriver.getName(), password);
 
-        return true;
+        return Optional.empty();
     }
 }
